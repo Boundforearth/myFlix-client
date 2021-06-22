@@ -22167,8 +22167,8 @@ MovieCard.propTypes = {
         Director: _propTypesDefault.default.shape({
             Name: _propTypesDefault.default.string.isRequired,
             Bio: _propTypesDefault.default.string,
-            Birth: _propTypesDefault.default.instanceOf(Date),
-            Death: _propTypesDefault.default.instanceOf(Date)
+            Birth: _propTypesDefault.default.string,
+            Death: _propTypesDefault.default.string
         }).isRequired,
         Genre: _propTypesDefault.default.shape({
             Name: _propTypesDefault.default.string.isRequired,
@@ -22933,7 +22933,7 @@ class MovieView extends _reactDefault.default.Component {
             },
             __self: this
         }, movie.Title)), /*#__PURE__*/ _reactDefault.default.createElement("div", {
-            className: "movie-description",
+            className: "movie-genre",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
                 lineNumber: 30
@@ -22946,11 +22946,53 @@ class MovieView extends _reactDefault.default.Component {
                 lineNumber: 31
             },
             __self: this
-        }, "Description: "), /*#__PURE__*/ _reactDefault.default.createElement("span", {
+        }, "Genre: "), /*#__PURE__*/ _reactDefault.default.createElement("span", {
             className: "value",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
                 lineNumber: 32
+            },
+            __self: this
+        }, movie.Genre.Name)), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "movie-director",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 34
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
+            className: "label",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 35
+            },
+            __self: this
+        }, "Director "), /*#__PURE__*/ _reactDefault.default.createElement("span", {
+            className: "value",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 36
+            },
+            __self: this
+        }, movie.Director.Name)), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "movie-description",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 38
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
+            className: "label",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 39
+            },
+            __self: this
+        }, "Description: "), /*#__PURE__*/ _reactDefault.default.createElement("span", {
+            className: "value",
+            __source: {
+                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
+                lineNumber: 40
             },
             __self: this
         }, movie.Description)), /*#__PURE__*/ _reactDefault.default.createElement("button", {
@@ -22959,12 +23001,31 @@ class MovieView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 34
+                lineNumber: 42
             },
             __self: this
         }, "Back")));
     }
 }
+MovieView.propTypes = {
+    movie: _propTypesDefault.default.shape({
+        Title: _propTypesDefault.default.string.isRequired,
+        Description: _propTypesDefault.default.string.isRequired,
+        ImagePath: _propTypesDefault.default.string.isRequired,
+        Featured: _propTypesDefault.default.bool.isRequired,
+        Director: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Bio: _propTypesDefault.default.string,
+            Birth: _propTypesDefault.default.string,
+            Death: _propTypesDefault.default.string
+        }).isRequired,
+        Genre: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Description: _propTypesDefault.default.string
+        }).isRequired
+    }).isRequired,
+    onBackClick: _propTypesDefault.default.func.isRequired
+};
 
   helpers.postlude(module);
 } finally {
@@ -24420,7 +24481,7 @@ function LoginView(props) {
             lineNumber: 32
         },
         __self: this
-    }, "Submit"), /*#__PURE__*/ _reactDefault.default.createElement("button", {
+    }, "Sign In"), /*#__PURE__*/ _reactDefault.default.createElement("button", {
         type: "button",
         onClick: needToRegister,
         __source: {
@@ -24459,6 +24520,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _registrationViewScss = require("./registration-view.scss");
 var _s = $RefreshSig$();
 function RegistrationView(props) {
     _s();
@@ -24473,13 +24535,13 @@ function RegistrationView(props) {
     return(/*#__PURE__*/ _reactDefault.default.createElement("form", {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 16
+            lineNumber: 18
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("label", {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 17
+            lineNumber: 19
         },
         __self: this
     }, "Username:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
@@ -24489,13 +24551,13 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 19
+            lineNumber: 21
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement("label", {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 21
+            lineNumber: 23
         },
         __self: this
     }, "Password:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
@@ -24505,13 +24567,13 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 23
+            lineNumber: 25
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement("label", {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 25
+            lineNumber: 27
         },
         __self: this
     }, "email:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
@@ -24521,13 +24583,13 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 27
+            lineNumber: 29
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement("label", {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 29
+            lineNumber: 31
         },
         __self: this
     }, "birthday:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
@@ -24537,7 +24599,7 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 31
+            lineNumber: 33
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement("button", {
@@ -24545,10 +24607,10 @@ function RegistrationView(props) {
         onClick: handleSubmit,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 33
+            lineNumber: 35
         },
         __self: this
-    }, "Submit")));
+    }, "Register")));
 }
 _s(RegistrationView, "aL1fP6hFumtSFbwZT5hYyZj9j0k=");
 _c = RegistrationView;
@@ -24563,6 +24625,6 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5"}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5","./registration-view.scss":"5NBd3"}],"5NBd3":[function() {},{}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
 
 //# sourceMappingURL=index.24b0b4eb.js.map
