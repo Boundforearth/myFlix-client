@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import "./registration-view.scss"
+
 export function RegistrationView(props) {
   const [username, registerUsername] = useState("");
   const [password, registerPassword] = useState("");
@@ -30,7 +32,7 @@ export function RegistrationView(props) {
         birthday:
         <input type="date" value={birthday} onChange={(e) => registerBirthday(e.target.value)} />
       </label>
-      <button type="button" onClick={handleSubmit}>Submit</button>
+      <button type="button" onClick={handleSubmit}>Register</button>
     </form>
   );
 }
