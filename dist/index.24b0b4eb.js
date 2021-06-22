@@ -22126,7 +22126,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../movie-card/movie-card":"2woGz","../movie-view/movie-view":"2M9DM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","axios":"7rA65","../login-view/login-view":"G55j5","../registration-view/registration-view":"67XEg"}],"2woGz":[function(require,module,exports) {
+},{"react":"3b2NM","../movie-card/movie-card":"2woGz","../movie-view/movie-view":"2M9DM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","axios":"7rA65","../registration-view/registration-view":"67XEg","../login-view/login-view":"G55j5"}],"2woGz":[function(require,module,exports) {
 var helpers = require("../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24398,114 +24398,7 @@ module.exports = CancelToken;
     return typeof payload === 'object' && payload.isAxiosError === true;
 };
 
-},{}],"G55j5":[function(require,module,exports) {
-var helpers = require("../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "LoginView", ()=>LoginView
-);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _s = $RefreshSig$();
-function LoginView(props) {
-    _s();
-    const [username, setUsername] = _react.useState("");
-    const [password, setPassword] = _react.useState("");
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        console.log(username, password);
-        //Send a request to the server for authentication
-        //then call props.onLoggedIn(username)
-        props.onLoggedIn(username);
-    };
-    const needToRegister = (e)=>{
-        e.preventDefault();
-        props.notRegistered();
-    };
-    return(/*#__PURE__*/ _reactDefault.default.createElement("form", {
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 22
-        },
-        __self: this
-    }, /*#__PURE__*/ _reactDefault.default.createElement("label", {
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 23
-        },
-        __self: this
-    }, "Username:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
-        type: "text",
-        value: username,
-        onChange: (e)=>setUsername(e.target.value)
-        ,
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 25
-        },
-        __self: this
-    })), /*#__PURE__*/ _reactDefault.default.createElement("label", {
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 27
-        },
-        __self: this
-    }, "Password:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
-        type: "password",
-        value: password,
-        onChange: (e)=>setPassword(e.target.value)
-        ,
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 29
-        },
-        __self: this
-    })), /*#__PURE__*/ _reactDefault.default.createElement("span", {
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 31
-        },
-        __self: this
-    }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
-        type: "button",
-        onClick: handleSubmit,
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 32
-        },
-        __self: this
-    }, "Sign In"), /*#__PURE__*/ _reactDefault.default.createElement("button", {
-        type: "button",
-        onClick: needToRegister,
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 33
-        },
-        __self: this
-    }, "Register"))));
-}
-_s(LoginView, "lLPiMBLCwTVrGnt2k2TCjpjjkQI=");
-_c = LoginView;
-LoginView.propTypes = {
-    notRegistered: _propTypesDefault.default.func.isRequired,
-    onLoggedIn: _propTypesDefault.default.func.isRequired
-};
-var _c;
-$RefreshReg$(_c, "LoginView");
-
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5"}],"67XEg":[function(require,module,exports) {
+},{}],"67XEg":[function(require,module,exports) {
 var helpers = require("../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24625,6 +24518,113 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5","./registration-view.scss":"5NBd3"}],"5NBd3":[function() {},{}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
+},{"react":"3b2NM","prop-types":"4dfy5","./registration-view.scss":"5NBd3","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6"}],"5NBd3":[function() {},{}],"G55j5":[function(require,module,exports) {
+var helpers = require("../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LoginView", ()=>LoginView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _s = $RefreshSig$();
+function LoginView(props) {
+    _s();
+    const [username, setUsername] = _react.useState("");
+    const [password, setPassword] = _react.useState("");
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log(username, password);
+        //Send a request to the server for authentication
+        //then call props.onLoggedIn(username)
+        props.onLoggedIn(username);
+    };
+    const needToRegister = (e)=>{
+        e.preventDefault();
+        props.notRegistered();
+    };
+    return(/*#__PURE__*/ _reactDefault.default.createElement("form", {
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 22
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("label", {
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 23
+        },
+        __self: this
+    }, "Username:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
+        type: "text",
+        value: username,
+        onChange: (e)=>setUsername(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 25
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement("label", {
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 27
+        },
+        __self: this
+    }, "Password:", /*#__PURE__*/ _reactDefault.default.createElement("input", {
+        type: "password",
+        value: password,
+        onChange: (e)=>setPassword(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 29
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement("span", {
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 31
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
+        type: "button",
+        onClick: handleSubmit,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 32
+        },
+        __self: this
+    }, "Sign In"), /*#__PURE__*/ _reactDefault.default.createElement("button", {
+        type: "button",
+        onClick: needToRegister,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 33
+        },
+        __self: this
+    }, "Register"))));
+}
+_s(LoginView, "lLPiMBLCwTVrGnt2k2TCjpjjkQI=");
+_c = LoginView;
+LoginView.propTypes = {
+    notRegistered: _propTypesDefault.default.func.isRequired,
+    onLoggedIn: _propTypesDefault.default.func.isRequired
+};
+var _c;
+$RefreshReg$(_c, "LoginView");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","prop-types":"4dfy5","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6"}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
 
 //# sourceMappingURL=index.24b0b4eb.js.map
