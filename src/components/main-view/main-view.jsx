@@ -1,10 +1,15 @@
 import React from "react";
 import axios from "axios";
+import Row from "react-bootstrap/row";
+import Col from "react-bootstrap/col";
 
 import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { NavView } from "../nav-view/nav-view";
+
+import "./main-view.scss";
 
 export class MainView extends React.Component {
 
@@ -69,20 +74,34 @@ export class MainView extends React.Component {
     }
 
     if (movies.length === 0) {
-      return <div className="main-view">apples</div>
+      return <div className="main-view"></div>
     }
 
     if(selectedMovie) {
-      return <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie);}} />
+      return (
+        <div>
+          <NavView username={user}/>
+          <Row className="justify-content-md-center">
+            <Col md={8}>
+              <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie);}} />
+            </Col>
+          </Row>
+        </div>
+      )
     }
     
     return (
-      <div className="main-view">
-        {movies.map((movie) => {
-           return (<MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { 
-             this.setSelectedMovie(movie)
-            }}/>);
-        })}
+      <div>
+        <NavView username={user}/>
+        <Row className="main-view justify-content-md-center">
+          {movies.map((movie) => {
+            return (
+                <Col lg={3} md={4} sm={6} className="small-col-sizing" bsPrefix="all-col-sizing">
+                  <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
+                </Col>
+            );
+          })}
+        </Row>
       </div>
     );
   }
