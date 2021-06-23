@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Form, Button } from "react-bootstrap";
 
 import "./registration-view.scss"
 
@@ -15,25 +16,25 @@ export function RegistrationView(props) {
   }
 
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={(e) => registerUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={(e) => registerPassword(e.target.value)} />
-      </label>
-      <label>
-        email:
-        <input type="email" value={email} onChange={(e) => registerEmail(e.target.value)} />
-      </label>
-      <label>
-        birthday:
-        <input type="date" value={birthday} onChange={(e) => registerBirthday(e.target.value)} />
-      </label>
-      <button type="button" onClick={handleSubmit}>Register</button>
-    </form>
+    <Form>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="text" value={username} onChange={(e) => registerUsername(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" value={password} onChange={(e) => registerPassword(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" value={email} onChange={(e) => registerEmail(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formBirthdayMonthDayYear">
+        <Form.Label>Birthday</Form.Label>
+        <Form.Control type="date" value={birthday} onChange={(e) => registerBirthday(e.target.value)} />
+      </Form.Group>
+      <Button>Register</Button>
+    </Form>
   );
 }
 
