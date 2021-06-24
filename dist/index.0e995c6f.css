@@ -6,7 +6,7 @@
   margin: 1rem;
 }
 
-.card-img {
+.movie-card-img {
   height: 20rem;
 }
 
@@ -15,18 +15,23 @@
   padding: 0.675rem;
 }
 
+p {
+  max-height: 12rem;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+
 body {
   padding-top: 5rem;
 }
 
 .all-col-sizing {
   padding: 0;
+  min-width: 10rem;
 }
 
-@media screen and (max-width: 576px) {
-  .small-col-sizing {
-    display: flex;
-    justify-content: center;
-  }
+.row {
+  justify-content: center;
 }
 /*# sourceMappingURL=index.0e995c6f.css.map */
