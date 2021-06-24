@@ -4,11 +4,9 @@ body {
 
 .all-col-sizing {
   padding: 0;
+  min-width: 10rem;
 }
 
-@media screen and (max-width: 576px) {
-  .small-col-sizing {
-    display: flex;
-    justify-content: center;
-  }
+.row {
+  justify-content: center;
 }
