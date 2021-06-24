@@ -3,6 +3,12 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstr
 
 export function NavView(props) {
   const user = props.username
+  const changeView = props.changeView
+
+  const handleChange = (e) => {
+    let view = e.target.value;
+    changeView(view);
+  }
   return (
     <Navbar bg="light" fixed="top" expand="md">
       <Navbar.Brand>myFlix</Navbar.Brand>
@@ -19,6 +25,10 @@ export function NavView(props) {
         <Form inline>
           <FormControl type="text" placeholder="Search..." className="mr-sm-2" />
           <Button type="submit" variant="secondary">Submit</Button>
+        </Form>
+        <Form inline>
+          <Form.Check inline onClick={handleChange} label="1" name="group1" value="1" type="radio" id="inline-radio-1"/>
+          <Form.Check inline onClick={handleChange} label="2" name="group1" value="2"type="radio" id="inline-radio-2"/>
         </Form>
       </Navbar.Collapse>
     </Navbar>

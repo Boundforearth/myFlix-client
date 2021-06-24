@@ -33,7 +33,7 @@ export function RegistrationView(props) {
         <Form.Label>Birthday</Form.Label>
         <Form.Control type="date" value={birthday} onChange={(e) => registerBirthday(e.target.value)} />
       </Form.Group>
-      <Button>Register</Button>
+      <Button variant="secondary" onClick={handleSubmit}>Register</Button>
     </Form>
   );
 }

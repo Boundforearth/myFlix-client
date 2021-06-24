@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Row from "react-bootstrap/row";
-import Col from "react-bootstrap/col";
+import { Row, Col } from "react-bootstrap";
 
 import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
@@ -19,7 +18,8 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      registered: true
+      registered: true,
+      selectedView: 1
     };
   }
 
@@ -34,6 +34,13 @@ export class MainView extends React.Component {
         console.log(error)
       });
   }
+
+  setSelectedView(view) {
+    this.setState({
+      selectedView: view
+    })
+  }
+
 
   setSelectedMovie(movie) {
     this.setState({
@@ -63,6 +70,7 @@ export class MainView extends React.Component {
     const selectedMovie = this.state.selectedMovie;
     const user = this.state.user
     const registered = this.state.registered;
+    const selectedView = this.state.selectedView
 
    if(!user && (registered === true)) {return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} 
     notRegistered={() => {
@@ -80,9 +88,9 @@ export class MainView extends React.Component {
     if(selectedMovie) {
       return (
         <div>
-          <NavView username={user}/>
+          <NavView changeView={(view) => {this.setSelectedView(view)}} username={user}/>
           <Row className="justify-content-md-center">
-            <Col md={8}>
+            <Col md={6} xs={8}>
               <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie);}} />
             </Col>
           </Row>
@@ -92,12 +100,12 @@ export class MainView extends React.Component {
     
     return (
       <div>
-        <NavView username={user}/>
+        <NavView changeView={(view) => {this.setSelectedView(view)}} username={user}/>
         <Row className="main-view justify-content-md-center">
           {movies.map((movie) => {
             return (
-                <Col lg={3} md={4} sm={6} className="small-col-sizing" bsPrefix="all-col-sizing">
-                  <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
+                <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={movie._id}>
+                  <MovieCard selectedView={selectedView} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
                 </Col>
             );
           })}

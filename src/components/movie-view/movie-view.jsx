@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button, Card } from "react-bootstrap";
+
+import "./movie-view.scss"
 
 export class MovieView extends React.Component {
   
@@ -19,28 +22,19 @@ export class MovieView extends React.Component {
     const movie = this.props.movie;
     const onBackClick = this.props.onBackClick;
     return(
-    <div className="movie-view">
-      <div className="movie-poster">
-        <img src={movie.ImagePath} />
-      </div>
-      <div className="movie-title">
-        <span className="label">Title: </span>
-        <span className="value">{movie.Title}</span>
-      </div>
-      <div className="movie-genre">
-        <span className="label">Genre: </span>
-        <span className="value">{movie.Genre.Name}</span>
-      </div>
-      <div className="movie-director">
-        <span className="label">Director </span>
-        <span className="value">{movie.Director.Name}</span>
-      </div>
-      <div className="movie-description">
-        <span className="label">Description: </span>
-        <span className="value">{movie.Description}</span>
-      </div>
-      <button onClick={() => {onBackClick(null);}}>Back</button>
-    </div>
+      <Card bsPrefix="movie-view-width">
+        <Card.Img 
+          variant="top"
+          src={movie.ImagePath}
+          />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">Genre: {movie.Genre.Name}</Card.Subtitle>
+          <Card.Text>Director: {movie.Director.Name}</Card.Text>
+          <Card.Text>{movie.Description}</Card.Text>
+        </Card.Body>
+        <Button variant="secondary" onClick={() => onBackClick()}>Back</Button>
+      </Card>
     );
   }
 }
