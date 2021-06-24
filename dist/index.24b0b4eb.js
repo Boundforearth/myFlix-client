@@ -22075,6 +22075,9 @@ class MainView extends _reactDefault.default.Component {
         const user = this.state.user;
         const registered = this.state.registered;
         const selectedView = this.state.selectedView;
+        let selectedViewFlex;
+        if (selectedView === "2") selectedViewFlex = "flex-column";
+        if (selectedView === "1") selectedViewFlex = "flex-row";
         if (!user && registered === true) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
             onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
@@ -22083,7 +22086,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 75
+                lineNumber: 83
             },
             __self: this
         }));
@@ -22092,7 +22095,7 @@ class MainView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 81
+                lineNumber: 89
             },
             __self: this
         }));
@@ -22100,14 +22103,14 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 85
+                lineNumber: 93
             },
             __self: this
         }));
         if (selectedMovie) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 90
+                lineNumber: 98
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
@@ -22117,14 +22120,14 @@ class MainView extends _reactDefault.default.Component {
             username: user,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 91
+                lineNumber: 99
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "justify-content-md-center",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 92
+                lineNumber: 100
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
@@ -22132,7 +22135,7 @@ class MainView extends _reactDefault.default.Component {
             xs: 8,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 93
+                lineNumber: 101
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
@@ -22142,14 +22145,14 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 94
+                lineNumber: 102
             },
             __self: this
         })))));
         return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 102
+                lineNumber: 110
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
@@ -22159,14 +22162,15 @@ class MainView extends _reactDefault.default.Component {
             username: user,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 103
+                lineNumber: 111
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "main-view justify-content-md-center",
+            id: selectedViewFlex,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 104
+                lineNumber: 112
             },
             __self: this
         }, movies.map((movie)=>{
@@ -22178,7 +22182,7 @@ class MainView extends _reactDefault.default.Component {
                 key: movie._id,
                 __source: {
                     fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 107
+                    lineNumber: 115
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
@@ -22189,7 +22193,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 108
+                    lineNumber: 116
                 },
                 __self: this
             })));
@@ -22217,8 +22221,6 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _movieCardScss = require("./movie-card.scss");
@@ -22226,53 +22228,62 @@ class MovieCard extends _reactDefault.default.Component {
     render() {
         const movie = this.props.movieData;
         const onMovieClick = this.props.onMovieClick;
+        const selectedView = this.props.selectedView;
+        let selectedStyle1;
+        let selectedStyle2;
+        let selectedStyle3;
+        if (selectedView === "2") {
+            selectedStyle1 = "horizontal-card";
+            selectedStyle2 = "horizontal-image-size";
+            selectedStyle3 = "horizontal-body";
+            console.log("grapes");
+        } else {
+            selectedStyle1 = "vertical-card";
+            selectedStyle2 = "vertical-image-size";
+            selectedStyle3 = "vertical-body";
+        }
         return(/*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
             bsPrefix: "card-styling",
+            id: selectedStyle1,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 13
+                lineNumber: 30
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
+            id: selectedStyle2,
             className: "movie-card-img",
             varient: "top",
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 14
+                lineNumber: 31
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Body, {
+            onClick: ()=>onMovieClick(movie)
+            ,
             bsPrefix: "body-sizing",
+            id: selectedStyle3,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 18
+                lineNumber: 36
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
             bsPrefix: "overflow-handle",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 19
+                lineNumber: 37
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Text, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 20
+                lineNumber: 38
             },
             __self: this
-        }, movie.Description), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
-            onClick: ()=>onMovieClick(movie)
-            ,
-            variant: "secondary",
-            block: true,
-            __source: {
-                fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 21
-            },
-            __self: this
-        }, "Open"))));
+        }, movie.Description))));
     }
 }
 MovieCard.propTypes = {
@@ -22300,7 +22311,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-bootstrap/Card":"1CZWQ","./movie-card.scss":"3cBK0"}],"4dfy5":[function(require,module,exports) {
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","prop-types":"4dfy5","react-bootstrap/Card":"1CZWQ","./movie-card.scss":"3cBK0"}],"4dfy5":[function(require,module,exports) {
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -22979,7 +22990,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"3OVnw"}],"1ru0l":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"3OVnw"}],"1CZWQ":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -22987,50 +22998,105 @@ exports.default = void 0;
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
 var _classnames = _interopRequireDefault(require("classnames"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _ThemeProvider = require("./ThemeProvider");
-var _SafeAnchor = _interopRequireDefault(require("./SafeAnchor"));
+var _createWithBsPrefix = _interopRequireDefault(require("./createWithBsPrefix"));
+var _divWithClassName = _interopRequireDefault(require("./divWithClassName"));
+var _CardContext = _interopRequireDefault(require("./CardContext"));
+var _CardImg = _interopRequireDefault(require("./CardImg"));
 var _excluded = [
     "bsPrefix",
-    "variant",
-    "size",
-    "active",
     "className",
-    "block",
-    "type",
+    "bg",
+    "text",
+    "border",
+    "body",
+    "children",
     "as"
 ];
-var defaultProps = {
-    variant: 'primary',
-    active: false,
-    disabled: false
-};
-var Button = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, variant = _ref.variant, size = _ref.size, active = _ref.active, className = _ref.className, block = _ref.block, type = _ref.type, as = _ref.as, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
-    var prefix = _ThemeProvider.useBootstrapPrefix(bsPrefix, 'btn');
-    var classes = _classnames.default(className, prefix, active && 'active', variant && prefix + "-" + variant, block && prefix + "-block", size && prefix + "-" + size);
-    if (props.href) return(/*#__PURE__*/ _react.default.createElement(_SafeAnchor.default, _extends2.default({
-    }, props, {
-        as: as,
-        ref: ref,
-        className: _classnames.default(classes, props.disabled && 'disabled')
-    })));
-    if (ref) props.ref = ref;
-    if (type) props.type = type;
-    else if (!as) props.type = 'button';
-    var Component = as || 'button';
-    return(/*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
-    }, props, {
-        className: classes
-    })));
+function _getRequireWildcardCache(nodeInterop) {
+    if (typeof WeakMap !== "function") return null;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function _getRequireWildcardCache1(nodeInterop1) {
+        return nodeInterop1 ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
+}
+function _interopRequireWildcard(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) return obj;
+    if (obj === null || typeof obj !== "object" && typeof obj !== "function") return {
+        default: obj
+    };
+    var cache = _getRequireWildcardCache(nodeInterop);
+    if (cache && cache.has(obj)) return cache.get(obj);
+    var newObj = {
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+        else newObj[key] = obj[key];
+    }
+    newObj.default = obj;
+    if (cache) cache.set(obj, newObj);
+    return newObj;
+}
+var DivStyledAsH5 = _divWithClassName.default('h5');
+var DivStyledAsH6 = _divWithClassName.default('h6');
+var CardBody = _createWithBsPrefix.default('card-body');
+var CardTitle = _createWithBsPrefix.default('card-title', {
+    Component: DivStyledAsH5
 });
-Button.displayName = 'Button';
-Button.defaultProps = defaultProps;
-var _default = Button;
+var CardSubtitle = _createWithBsPrefix.default('card-subtitle', {
+    Component: DivStyledAsH6
+});
+var CardLink = _createWithBsPrefix.default('card-link', {
+    Component: 'a'
+});
+var CardText = _createWithBsPrefix.default('card-text', {
+    Component: 'p'
+});
+var CardHeader = _createWithBsPrefix.default('card-header');
+var CardFooter = _createWithBsPrefix.default('card-footer');
+var CardImgOverlay = _createWithBsPrefix.default('card-img-overlay');
+var defaultProps = {
+    body: false
+};
+var Card = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, bg = _ref.bg, text = _ref.text, border = _ref.border, body = _ref.body, children = _ref.children, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
+    var prefix = _ThemeProvider.useBootstrapPrefix(bsPrefix, 'card');
+    var cardContext = _react.useMemo(function() {
+        return {
+            cardHeaderBsPrefix: prefix + "-header"
+        };
+    }, [
+        prefix
+    ]);
+    return(/*#__PURE__*/ _react.default.createElement(_CardContext.default.Provider, {
+        value: cardContext
+    }, /*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
+        ref: ref
+    }, props, {
+        className: _classnames.default(className, prefix, bg && "bg-" + bg, text && "text-" + text, border && "border-" + border)
+    }), body ? /*#__PURE__*/ // @ts-ignore
+    _react.default.createElement(CardBody, null, children) : children)));
+});
+Card.displayName = 'Card';
+Card.defaultProps = defaultProps;
+Card.Img = _CardImg.default;
+Card.Title = CardTitle;
+Card.Subtitle = CardSubtitle;
+Card.Body = CardBody;
+Card.Link = CardLink;
+Card.Text = CardText;
+Card.Header = CardHeader;
+Card.Footer = CardFooter;
+Card.ImgOverlay = CardImgOverlay;
+var _default = Card;
 exports.default = _default;
 module.exports = exports["default"];
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S","./SafeAnchor":"5VP5o"}],"4ttVj":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S","./createWithBsPrefix":"2oVVc","./divWithClassName":"27J3S","./CardContext":"71yot","./CardImg":"68LPL"}],"4ttVj":[function(require,module,exports) {
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
@@ -23184,205 +23250,7 @@ function createBootstrapComponent(Component, opts) {
 var _default = ThemeProvider;
 exports.default = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","react":"3b2NM"}],"5VP5o":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.default = void 0;
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-var _react = _interopRequireDefault(require("react"));
-var _createChainedFunction = _interopRequireDefault(require("./createChainedFunction"));
-var _excluded = [
-    "as",
-    "disabled",
-    "onKeyDown"
-];
-function isTrivialHref(href) {
-    return !href || href.trim() === '#';
-}
-/**
- * There are situations due to browser quirks or Bootstrap CSS where
- * an anchor tag is needed, when semantically a button tag is the
- * better choice. SafeAnchor ensures that when an anchor is used like a
- * button its accessible. It also emulates input `disabled` behavior for
- * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
- */ var SafeAnchor = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
-    var _ref$as = _ref.as, Component = _ref$as === void 0 ? 'a' : _ref$as, disabled = _ref.disabled, onKeyDown = _ref.onKeyDown, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
-    var handleClick = function handleClick1(event) {
-        var href = props.href, onClick = props.onClick;
-        if (disabled || isTrivialHref(href)) event.preventDefault();
-        if (disabled) {
-            event.stopPropagation();
-            return;
-        }
-        if (onClick) onClick(event);
-    };
-    var handleKeyDown = function handleKeyDown1(event) {
-        if (event.key === ' ') {
-            event.preventDefault();
-            handleClick(event);
-        }
-    };
-    if (isTrivialHref(props.href)) {
-        props.role = props.role || 'button'; // we want to make sure there is a href attribute on the node
-        // otherwise, the cursor incorrectly styled (except with role='button')
-        props.href = props.href || '#';
-    }
-    if (disabled) {
-        props.tabIndex = -1;
-        props['aria-disabled'] = true;
-    }
-    return(/*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
-        ref: ref
-    }, props, {
-        onClick: handleClick,
-        onKeyDown: _createChainedFunction.default(handleKeyDown, onKeyDown)
-    })));
-});
-SafeAnchor.displayName = 'SafeAnchor';
-var _default = SafeAnchor;
-exports.default = _default;
-module.exports = exports["default"];
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","react":"3b2NM","./createChainedFunction":"4RHiz"}],"4RHiz":[function(require,module,exports) {
-"use strict";
-exports.__esModule = true;
-exports.default = void 0;
-/**
- * Safe chained function
- *
- * Will only create a new function if needed,
- * otherwise will pass back existing functions or null.
- *
- * @param {function} functions to chain
- * @returns {function|null}
- */ function createChainedFunction() {
-    for(var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++)funcs[_key] = arguments[_key];
-    return funcs.filter(function(f) {
-        return f != null;
-    }).reduce(function(acc, f) {
-        if (typeof f !== 'function') throw new Error('Invalid Argument Type, must only provide functions, undefined, or null.');
-        if (acc === null) return f;
-        return function chainedFunction() {
-            for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
-            // @ts-ignore
-            acc.apply(this, args); // @ts-ignore
-            f.apply(this, args);
-        };
-    }, null);
-}
-var _default = createChainedFunction;
-exports.default = _default;
-module.exports = exports["default"];
-
-},{}],"1CZWQ":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.default = void 0;
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-var _classnames = _interopRequireDefault(require("classnames"));
-var _react = _interopRequireWildcard(require("react"));
-var _ThemeProvider = require("./ThemeProvider");
-var _createWithBsPrefix = _interopRequireDefault(require("./createWithBsPrefix"));
-var _divWithClassName = _interopRequireDefault(require("./divWithClassName"));
-var _CardContext = _interopRequireDefault(require("./CardContext"));
-var _CardImg = _interopRequireDefault(require("./CardImg"));
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "bg",
-    "text",
-    "border",
-    "body",
-    "children",
-    "as"
-];
-function _getRequireWildcardCache(nodeInterop) {
-    if (typeof WeakMap !== "function") return null;
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
-    return (_getRequireWildcardCache = function _getRequireWildcardCache1(nodeInterop1) {
-        return nodeInterop1 ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop);
-}
-function _interopRequireWildcard(obj, nodeInterop) {
-    if (!nodeInterop && obj && obj.__esModule) return obj;
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") return {
-        default: obj
-    };
-    var cache = _getRequireWildcardCache(nodeInterop);
-    if (cache && cache.has(obj)) return cache.get(obj);
-    var newObj = {
-    };
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
-        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
-        else newObj[key] = obj[key];
-    }
-    newObj.default = obj;
-    if (cache) cache.set(obj, newObj);
-    return newObj;
-}
-var DivStyledAsH5 = _divWithClassName.default('h5');
-var DivStyledAsH6 = _divWithClassName.default('h6');
-var CardBody = _createWithBsPrefix.default('card-body');
-var CardTitle = _createWithBsPrefix.default('card-title', {
-    Component: DivStyledAsH5
-});
-var CardSubtitle = _createWithBsPrefix.default('card-subtitle', {
-    Component: DivStyledAsH6
-});
-var CardLink = _createWithBsPrefix.default('card-link', {
-    Component: 'a'
-});
-var CardText = _createWithBsPrefix.default('card-text', {
-    Component: 'p'
-});
-var CardHeader = _createWithBsPrefix.default('card-header');
-var CardFooter = _createWithBsPrefix.default('card-footer');
-var CardImgOverlay = _createWithBsPrefix.default('card-img-overlay');
-var defaultProps = {
-    body: false
-};
-var Card = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, bg = _ref.bg, text = _ref.text, border = _ref.border, body = _ref.body, children = _ref.children, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
-    var prefix = _ThemeProvider.useBootstrapPrefix(bsPrefix, 'card');
-    var cardContext = _react.useMemo(function() {
-        return {
-            cardHeaderBsPrefix: prefix + "-header"
-        };
-    }, [
-        prefix
-    ]);
-    return(/*#__PURE__*/ _react.default.createElement(_CardContext.default.Provider, {
-        value: cardContext
-    }, /*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
-        ref: ref
-    }, props, {
-        className: _classnames.default(className, prefix, bg && "bg-" + bg, text && "text-" + text, border && "border-" + border)
-    }), body ? /*#__PURE__*/ // @ts-ignore
-    _react.default.createElement(CardBody, null, children) : children)));
-});
-Card.displayName = 'Card';
-Card.defaultProps = defaultProps;
-Card.Img = _CardImg.default;
-Card.Title = CardTitle;
-Card.Subtitle = CardSubtitle;
-Card.Body = CardBody;
-Card.Link = CardLink;
-Card.Text = CardText;
-Card.Header = CardHeader;
-Card.Footer = CardFooter;
-Card.ImgOverlay = CardImgOverlay;
-var _default = Card;
-exports.default = _default;
-module.exports = exports["default"];
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S","./createWithBsPrefix":"2oVVc","./divWithClassName":"27J3S","./CardContext":"71yot","./CardImg":"68LPL"}],"2oVVc":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","react":"3b2NM"}],"2oVVc":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -25501,6 +25369,37 @@ exports.default = triggerEvent;
 }
 module.exports = exports["default"];
 
+},{}],"4RHiz":[function(require,module,exports) {
+"use strict";
+exports.__esModule = true;
+exports.default = void 0;
+/**
+ * Safe chained function
+ *
+ * Will only create a new function if needed,
+ * otherwise will pass back existing functions or null.
+ *
+ * @param {function} functions to chain
+ * @returns {function|null}
+ */ function createChainedFunction() {
+    for(var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++)funcs[_key] = arguments[_key];
+    return funcs.filter(function(f) {
+        return f != null;
+    }).reduce(function(acc, f) {
+        if (typeof f !== 'function') throw new Error('Invalid Argument Type, must only provide functions, undefined, or null.');
+        if (acc === null) return f;
+        return function chainedFunction() {
+            for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
+            // @ts-ignore
+            acc.apply(this, args); // @ts-ignore
+            f.apply(this, args);
+        };
+    }, null);
+}
+var _default = createChainedFunction;
+exports.default = _default;
+module.exports = exports["default"];
+
 },{}],"dj3Zh":[function(require,module,exports) {
 "use strict";
 exports.__esModule = true;
@@ -25754,7 +25653,68 @@ var _default = CloseButton;
 exports.default = _default;
 module.exports = exports["default"];
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc"}],"2aFSj":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc"}],"5VP5o":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.default = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _react = _interopRequireDefault(require("react"));
+var _createChainedFunction = _interopRequireDefault(require("./createChainedFunction"));
+var _excluded = [
+    "as",
+    "disabled",
+    "onKeyDown"
+];
+function isTrivialHref(href) {
+    return !href || href.trim() === '#';
+}
+/**
+ * There are situations due to browser quirks or Bootstrap CSS where
+ * an anchor tag is needed, when semantically a button tag is the
+ * better choice. SafeAnchor ensures that when an anchor is used like a
+ * button its accessible. It also emulates input `disabled` behavior for
+ * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
+ */ var SafeAnchor = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
+    var _ref$as = _ref.as, Component = _ref$as === void 0 ? 'a' : _ref$as, disabled = _ref.disabled, onKeyDown = _ref.onKeyDown, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
+    var handleClick = function handleClick1(event) {
+        var href = props.href, onClick = props.onClick;
+        if (disabled || isTrivialHref(href)) event.preventDefault();
+        if (disabled) {
+            event.stopPropagation();
+            return;
+        }
+        if (onClick) onClick(event);
+    };
+    var handleKeyDown = function handleKeyDown1(event) {
+        if (event.key === ' ') {
+            event.preventDefault();
+            handleClick(event);
+        }
+    };
+    if (isTrivialHref(props.href)) {
+        props.role = props.role || 'button'; // we want to make sure there is a href attribute on the node
+        // otherwise, the cursor incorrectly styled (except with role='button')
+        props.href = props.href || '#';
+    }
+    if (disabled) {
+        props.tabIndex = -1;
+        props['aria-disabled'] = true;
+    }
+    return(/*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
+        ref: ref
+    }, props, {
+        onClick: handleClick,
+        onKeyDown: _createChainedFunction.default(handleKeyDown, onKeyDown)
+    })));
+});
+SafeAnchor.displayName = 'SafeAnchor';
+var _default = SafeAnchor;
+exports.default = _default;
+module.exports = exports["default"];
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","react":"3b2NM","./createChainedFunction":"4RHiz"}],"2aFSj":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -25883,7 +25843,58 @@ var _default = BreadcrumbItem;
 exports.default = _default;
 module.exports = exports["default"];
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./SafeAnchor":"5VP5o","./ThemeProvider":"4rz1S"}],"2THBw":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./SafeAnchor":"5VP5o","./ThemeProvider":"4rz1S"}],"1ru0l":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.default = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _classnames = _interopRequireDefault(require("classnames"));
+var _react = _interopRequireDefault(require("react"));
+var _ThemeProvider = require("./ThemeProvider");
+var _SafeAnchor = _interopRequireDefault(require("./SafeAnchor"));
+var _excluded = [
+    "bsPrefix",
+    "variant",
+    "size",
+    "active",
+    "className",
+    "block",
+    "type",
+    "as"
+];
+var defaultProps = {
+    variant: 'primary',
+    active: false,
+    disabled: false
+};
+var Button = /*#__PURE__*/ _react.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, variant = _ref.variant, size = _ref.size, active = _ref.active, className = _ref.className, block = _ref.block, type = _ref.type, as = _ref.as, props = _objectWithoutPropertiesLoose2.default(_ref, _excluded);
+    var prefix = _ThemeProvider.useBootstrapPrefix(bsPrefix, 'btn');
+    var classes = _classnames.default(className, prefix, active && 'active', variant && prefix + "-" + variant, block && prefix + "-block", size && prefix + "-" + size);
+    if (props.href) return(/*#__PURE__*/ _react.default.createElement(_SafeAnchor.default, _extends2.default({
+    }, props, {
+        as: as,
+        ref: ref,
+        className: _classnames.default(classes, props.disabled && 'disabled')
+    })));
+    if (ref) props.ref = ref;
+    if (type) props.type = type;
+    else if (!as) props.type = 'button';
+    var Component = as || 'button';
+    return(/*#__PURE__*/ _react.default.createElement(Component, _extends2.default({
+    }, props, {
+        className: classes
+    })));
+});
+Button.displayName = 'Button';
+Button.defaultProps = defaultProps;
+var _default = Button;
+exports.default = _default;
+module.exports = exports["default"];
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S","./SafeAnchor":"5VP5o"}],"2THBw":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -37003,11 +37014,16 @@ parcelHelpers.export(exports, "NavView", ()=>NavView
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
+var _verticalViewPng = require("url:./nav-view-images/Vertical-view.png");
+var _verticalViewPngDefault = parcelHelpers.interopDefault(_verticalViewPng);
+var _horizontalViewPng = require("url:./nav-view-images/Horizontal-view.png");
+var _horizontalViewPngDefault = parcelHelpers.interopDefault(_horizontalViewPng);
+var _navViewScss = require("./nav-view.scss");
 function NavView(props) {
     const user = props.username;
     const changeView = props.changeView;
     const handleChange = (e)=>{
-        let view = e.target.value;
+        let view = e.target.dataset.value;
         changeView(view);
     };
     return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
@@ -37016,34 +37032,34 @@ function NavView(props) {
         expand: "md",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 13
+            lineNumber: 17
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 14
+            lineNumber: 18
         },
         __self: this
     }, "myFlix"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
         "aria-controls": "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 15
+            lineNumber: 19
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
         id: "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 16
+            lineNumber: 20
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 17
+            lineNumber: 21
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown, {
@@ -37051,41 +37067,41 @@ function NavView(props) {
         id: "basic-nav-dropdown",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 18
+            lineNumber: 22
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action1",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 19
+            lineNumber: 23
         },
         __self: this
     }, "MyProfile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 20
+            lineNumber: 24
         },
         __self: this
     }, "Favorites"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Divider, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 21
+            lineNumber: 25
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action3",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 22
+            lineNumber: 26
         },
         __self: this
     }, "Log-out"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
         inline: true,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 25
+            lineNumber: 29
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -37094,7 +37110,7 @@ function NavView(props) {
         className: "mr-sm-2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 26
+            lineNumber: 30
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -37102,40 +37118,36 @@ function NavView(props) {
         variant: "secondary",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 27
-        },
-        __self: this
-    }, "Submit")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
-        inline: true,
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 29
-        },
-        __self: this
-    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Check, {
-        inline: true,
-        onClick: handleChange,
-        label: "1",
-        name: "group1",
-        value: "1",
-        type: "radio",
-        id: "inline-radio-1",
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 30
-        },
-        __self: this
-    }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Check, {
-        inline: true,
-        onClick: handleChange,
-        label: "2",
-        name: "group1",
-        value: "2",
-        type: "radio",
-        id: "inline-radio-2",
-        __source: {
-            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
             lineNumber: 31
+        },
+        __self: this
+    }, "Submit")), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+        id: "view-select-block",
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
+            lineNumber: 33
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
+        className: "view-choice",
+        alternate: "Change to vertical view",
+        onClick: handleChange,
+        "data-value": "1",
+        src: _verticalViewPngDefault.default,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
+            lineNumber: 34
+        },
+        __self: this
+    }), /*#__PURE__*/ _reactDefault.default.createElement("img", {
+        className: "view-choice",
+        alternate: "Change to horizontal view",
+        onClick: handleChange,
+        "data-value": "2",
+        src: _horizontalViewPngDefault.default,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
+            lineNumber: 35
         },
         __self: this
     })))));
@@ -37149,6 +37161,40 @@ $RefreshReg$(_c, "NavView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","react-bootstrap":"4n7hB"}],"bo9KH":[function() {},{}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","react-bootstrap":"4n7hB","./nav-view.scss":"1EyAR","url:./nav-view-images/Vertical-view.png":"7M0K0","url:./nav-view-images/Horizontal-view.png":"QbPsu"}],"1EyAR":[function() {},{}],"7M0K0":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "Vertical-view.67fd010f.png";
+
+},{"./bundle-url":"6yFi8"}],"6yFi8":[function(require,module,exports) {
+"use strict";
+/* globals document:readonly */ var bundleURL = null;
+function getBundleURLCached() {
+    if (!bundleURL) bundleURL = getBundleURL();
+    return bundleURL;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) return getBaseURL(matches[0]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    let matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"QbPsu":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "Horizontal-view.dce5943b.png";
+
+},{"./bundle-url":"6yFi8"}],"bo9KH":[function() {},{}]},["1j6wU","6J436","3kOQp"], "3kOQp", "parcelRequire279c")
 
 //# sourceMappingURL=index.24b0b4eb.js.map

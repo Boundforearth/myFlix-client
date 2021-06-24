@@ -1,8 +1,11 @@
 .my-flix {
   color: steelblue;
 }
-.card-styling {
+#vertical-card {
   max-width: 14rem;
+}
+
+.card-styling {
   margin: 1rem;
 }
 
@@ -10,9 +13,13 @@
   height: 20rem;
 }
 
+#vertical-body {
+  height: 15rem;
+}
+
 .body-sizing {
-  height: 20rem;
   padding: 0.675rem;
+  cursor: pointer;
 }
 
 p {
@@ -21,7 +28,36 @@ p {
   text-overflow: ellipsis;
 }
 
+#horizontal-card {
+  display: flex;
+}
 
+#horizontal-image-size {
+  height: 10rem;
+  width: 7rem;
+}
+
+#horizontal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+#view-select-block {
+  width: 10rem;
+  display: inline-block;
+  margin-left: 1rem;
+  border-radius: 50%;
+}
+
+.view-1 {
+  display: inline-block;
+  cursor: pointer;
+  background-color: black;
+  height: 10rem;
+  width: 10rem;
+}
 body {
   padding-top: 5rem;
 }
@@ -33,5 +69,9 @@ body {
 
 .row {
   justify-content: center;
+}
+
+#flex-column {
+  flex-direction: column;
 }
 /*# sourceMappingURL=index.0e995c6f.css.map */
