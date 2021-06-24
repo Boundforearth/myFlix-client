@@ -1,24 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
   render() {
-    const movie = this.props.movieData
-    const onMovieClick = this.props.onMovieClick
+    const movie = this.props.movieData;
+    const onMovieClick = this.props.onMovieClick;
+    const selectedView = this.props.selectedView;
+    let selectedStyle1;
+    let selectedStyle2;
+    let selectedStyle3;
+
+    if(selectedView === "2") {
+      selectedStyle1 = "horizontal-card";
+      selectedStyle2 = "horizontal-image-size";
+      selectedStyle3 = "horizontal-body";
+      console.log("grapes")
+    }
+
+    else {
+      selectedStyle1 = "vertical-card";
+      selectedStyle2 = "vertical-image-size";
+      selectedStyle3 = "vertical-body";
+    }
+
     return (
-      <Card bsPrefix="card-styling">
+      <Card bsPrefix="card-styling" id={selectedStyle1}>
         <Card.Img 
+            id={selectedStyle2}
             className="movie-card-img"
             varient="top" 
             src={movie.ImagePath} />
-        <Card.Body bsPrefix="body-sizing">
+        <Card.Body onClick={() => onMovieClick(movie)} bsPrefix="body-sizing" id={selectedStyle3}>
           <Card.Title bsPrefix="overflow-handle">{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
-          <Button onClick={() => onMovieClick(movie)} variant="secondary" block>Open</Button>
         </Card.Body>
       </Card>
     );

@@ -70,7 +70,15 @@ export class MainView extends React.Component {
     const selectedMovie = this.state.selectedMovie;
     const user = this.state.user
     const registered = this.state.registered;
-    const selectedView = this.state.selectedView
+    const selectedView = this.state.selectedView;
+    let selectedViewFlex;
+
+    if(selectedView === "2") {
+      selectedViewFlex = "flex-column";
+    }
+    if(selectedView === "1"){
+      selectedViewFlex = "flex-row"
+    }
 
    if(!user && (registered === true)) {return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} 
     notRegistered={() => {
@@ -101,7 +109,7 @@ export class MainView extends React.Component {
     return (
       <div>
         <NavView changeView={(view) => {this.setSelectedView(view)}} username={user}/>
-        <Row className="main-view justify-content-md-center">
+        <Row className="main-view justify-content-md-center" id={selectedViewFlex}>
           {movies.map((movie) => {
             return (
                 <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={movie._id}>

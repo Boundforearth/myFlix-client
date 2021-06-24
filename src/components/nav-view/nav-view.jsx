@@ -1,12 +1,16 @@
 import React from "react";
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
+import Vertical from "url:./nav-view-images/Vertical-view.png";
+import Horizontal from "url:./nav-view-images/Horizontal-view.png";
+
+import "./nav-view.scss"
 
 export function NavView(props) {
   const user = props.username
   const changeView = props.changeView
 
   const handleChange = (e) => {
-    let view = e.target.value;
+    let view = e.target.dataset.value;
     changeView(view);
   }
   return (
@@ -26,10 +30,10 @@ export function NavView(props) {
           <FormControl type="text" placeholder="Search..." className="mr-sm-2" />
           <Button type="submit" variant="secondary">Submit</Button>
         </Form>
-        <Form inline>
-          <Form.Check inline onClick={handleChange} label="1" name="group1" value="1" type="radio" id="inline-radio-1"/>
-          <Form.Check inline onClick={handleChange} label="2" name="group1" value="2"type="radio" id="inline-radio-2"/>
-        </Form>
+        <div id="view-select-block">
+          <img className="view-choice" alternate="Change to vertical view" onClick={handleChange} data-value="1" src={Vertical}/>
+          <img className="view-choice" alternate="Change to horizontal view" onClick={handleChange} data-value="2" src={Horizontal}/>
+        </div>
       </Navbar.Collapse>
     </Navbar>
   )
