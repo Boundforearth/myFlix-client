@@ -1,5 +1,8 @@
-.card-styling {
+#vertical-card {
   max-width: 14rem;
+}
+
+.card-styling {
   margin: 1rem;
 }
 
@@ -7,13 +10,32 @@
   height: 20rem;
 }
 
+#vertical-body {
+  height: 15rem;
+}
+
 .body-sizing {
-  height: 20rem;
   padding: .675rem;
+  cursor: pointer;
 }
 
 p {
   max-height: 12rem;
   overflow: scroll;
   text-overflow: ellipsis;
+}
+
+#horizontal-card {
+  display: flex;
+}
+
+#horizontal-image-size {
+  height: 10rem;
+  width: 7rem;
+}
+
+#horizontal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
