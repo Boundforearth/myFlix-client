@@ -3,7 +3,7 @@
   margin: 1rem;
 }
 
-.card-img {
+.movie-card-img {
   height: 20rem;
 }
 
@@ -12,3 +12,8 @@
   padding: .675rem;
 }
 
+p {
+  max-height: 12rem;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}

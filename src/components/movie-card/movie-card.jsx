@@ -12,10 +12,11 @@ export class MovieCard extends React.Component {
     return (
       <Card bsPrefix="card-styling">
         <Card.Img 
+            className="movie-card-img"
             varient="top" 
             src={movie.ImagePath} />
         <Card.Body bsPrefix="body-sizing">
-          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Title bsPrefix="overflow-handle">{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
           <Button onClick={() => onMovieClick(movie)} variant="secondary" block>Open</Button>
         </Card.Body>
