@@ -4,3 +4,25 @@
   margin-left: 1rem;
   border-radius: 50%;
 }
+
+.view-choice {
+  margin-left: 2px
+}
+
+.view-button {
+  padding: 0;
+  border-color: rgb(212, 209, 209);
+  margin-left: 2px;
+}
+
+.vertical {
+  border-color: black;
+}
+
+.horizontal {
+  border-color: black;
+}
+
+.view-button:hover {
+  border-color: gray;
+}

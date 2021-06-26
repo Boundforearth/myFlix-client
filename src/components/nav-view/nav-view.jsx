@@ -6,8 +6,22 @@ import Horizontal from "url:./nav-view-images/Horizontal-view.png";
 import "./nav-view.scss"
 
 export function NavView(props) {
-  const user = props.username
-  const changeView = props.changeView
+  const user = props.username;
+  const changeView = props.changeView;
+  const view = props.selectedView;
+  let verticalButton
+  let horizontalButton
+
+
+  if (view === "2") {
+    horizontalButton = "horizontal";
+    verticalButton = "none";
+  }
+
+  else{
+    verticalButton = "vertical";
+    horizontalButton = "none";
+  }
 
   const handleChange = (e) => {
     let view = e.target.dataset.value;
@@ -31,8 +45,8 @@ export function NavView(props) {
           <Button type="submit" variant="secondary">Submit</Button>
         </Form>
         <div id="view-select-block">
-          <img className="view-choice" alternate="Change to vertical view" onClick={handleChange} data-value="1" src={Vertical}/>
-          <img className="view-choice" alternate="Change to horizontal view" onClick={handleChange} data-value="2" src={Horizontal}/>
+          <button className={`view-button ${verticalButton}`} ><img alt="View selection image" className="view-choice" alternate="Change to vertical view" onClick={handleChange} data-value="1" src={Vertical}/></button>
+          <button className={`view-button ${horizontalButton}`}><img alt="View selection image" className="view-choice" alternate="Change to horizontal view" onClick={handleChange} data-value="2" src={Horizontal}/></button>
         </div>
       </Navbar.Collapse>
     </Navbar>
