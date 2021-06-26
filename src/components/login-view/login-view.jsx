@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
 
+import "./login-view.scss"
+
 export function LoginView(props) {
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -20,7 +22,7 @@ export function LoginView(props) {
   }
 
   return (
-    <Form>
+    <Form id="form-styling">
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username..."/>
@@ -30,8 +32,10 @@ export function LoginView(props) {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
       </Form.Group>
-      <Button variant="secondary" type="button" onClick={handleSubmit}>Sign in</Button>
-      <Button variant="secondary" type="button" onClick={needToRegister}>Register</Button>
+      <div className="button-group">
+        <Button variant="secondary" type="button" onClick={handleSubmit}>Sign in</Button>
+        <Button variant="secondary" type="button" onClick={needToRegister}>Register</Button>
+      </div>
     </Form>
   );
 };
