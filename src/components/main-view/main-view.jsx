@@ -96,7 +96,7 @@ export class MainView extends React.Component {
     if(selectedMovie) {
       return (
         <div>
-          <NavView changeView={(view) => {this.setSelectedView(view)}} username={user}/>
+          <NavView selectedView={selectedView} changeView={(view) => {this.setSelectedView(view)}} username={user}/>
           <Row className="justify-content-md-center">
             <Col md={6} xs={8}>
               <MovieView movie={selectedMovie} onBackClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie);}} />
@@ -108,7 +108,7 @@ export class MainView extends React.Component {
     
     return (
       <div>
-        <NavView changeView={(view) => {this.setSelectedView(view)}} username={user}/>
+        <NavView selectedView={selectedView} changeView={(view) => {this.setSelectedView(view)}} username={user}/>
         <Row className="main-view justify-content-md-center" id={selectedViewFlex}>
           {movies.map((movie) => {
             return (
