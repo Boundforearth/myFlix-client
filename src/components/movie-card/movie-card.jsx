@@ -17,7 +17,6 @@ export class MovieCard extends React.Component {
       selectedStyle1 = "horizontal-card";
       selectedStyle2 = "horizontal-image-size";
       selectedStyle3 = "horizontal-body";
-      console.log("grapes")
     }
 
     else {
@@ -27,13 +26,13 @@ export class MovieCard extends React.Component {
     }
 
     return (
-      <Card bsPrefix="card-styling" id={selectedStyle1}>
+      <Card bsPrefix="card-styling" className={selectedStyle1}>
         <Card.Img 
-            id={selectedStyle2}
-            className="movie-card-img"
+            alt={`${movie} picture`}
+            className={`movie-card-img ${selectedStyle2}`}
             varient="top" 
             src={movie.ImagePath} />
-        <Card.Body onClick={() => onMovieClick(movie)} bsPrefix="body-sizing" id={selectedStyle3}>
+        <Card.Body onClick={() => onMovieClick(movie)} bsPrefix="body-sizing" className={selectedStyle3}>
           <Card.Title bsPrefix="overflow-handle">{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
         </Card.Body>

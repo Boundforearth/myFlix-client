@@ -1,5 +1,5 @@
-#vertical-card {
-  max-width: 14rem;
+.vertical-card {
+  max-width: 14rem !important;
 }
 
 .card-styling {
@@ -10,8 +10,8 @@
   height: 20rem;
 }
 
-#vertical-body {
-  height: 15rem;
+.vertical-body {
+  height: 15rem !important;
 }
 
 .body-sizing {
@@ -25,17 +25,17 @@ p {
   text-overflow: ellipsis;
 }
 
-#horizontal-card {
-  display: flex;
+.horizontal-card {
+  display: flex !important;
 }
 
-#horizontal-image-size {
-  height: 10rem;
-  width: 7rem;
+.horizontal-image-size {
+  height: 10rem !important;
+  width: 7rem !important;
 }
 
-#horizontal-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.horizontal-body {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
