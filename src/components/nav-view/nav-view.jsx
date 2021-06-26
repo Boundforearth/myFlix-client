@@ -1,18 +1,25 @@
 import React from "react";
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
+
+//images must be imported with the url:  part before them to work with parcel.
+//These images will be displayed to give users a visual hint about what the view will change to.
 import Vertical from "url:./nav-view-images/Vertical-view.png";
 import Horizontal from "url:./nav-view-images/Horizontal-view.png";
 
 import "./nav-view.scss"
 
 export function NavView(props) {
+  //set the imported props to variables
   const user = props.username;
   const changeView = props.changeView;
   const view = props.selectedView;
+
+  //These variables will be used to set a className
   let verticalButton
   let horizontalButton
 
 
+  //Both variables must be defined to prevent an empty class.  none is basically just a placeholder
   if (view === "2") {
     horizontalButton = "horizontal";
     verticalButton = "none";

@@ -6,19 +6,24 @@ import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
   render() {
+    //set the props to variables
     const movie = this.props.movieData;
     const onMovieClick = this.props.onMovieClick;
     const selectedView = this.props.selectedView;
+
+    //These variables will be used to set class to chnage the card display
     let selectedStyle1;
     let selectedStyle2;
     let selectedStyle3;
 
+    //If the user wants the horizontal cards, set the variables to horizontal values
     if(selectedView === "2") {
       selectedStyle1 = "horizontal-card";
       selectedStyle2 = "horizontal-image-size";
       selectedStyle3 = "horizontal-body";
     }
 
+    //This sets the variables to the default vertical values
     else {
       selectedStyle1 = "vertical-card";
       selectedStyle2 = "vertical-image-size";

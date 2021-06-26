@@ -22020,6 +22020,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
+//import other views to be used
 var _registrationView = require("../registration-view/registration-view");
 var _loginView = require("../login-view/login-view");
 var _movieCard = require("../movie-card/movie-card");
@@ -22027,16 +22028,22 @@ var _movieView = require("../movie-view/movie-view");
 var _navView = require("../nav-view/nav-view");
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
+    //set the states
     constructor(){
         super();
         this.state = {
             movies: [],
             selectedMovie: null,
             user: null,
+            //Assume already registered.  
             registered: true,
+            //Default view will be the vertical cards with images at the top
+            // 1 = vertical cards
+            // 2 = horizontal cards
             selectedView: 1
         };
     }
+    //get the movie data when the component mounts
     componentDidMount() {
         _axiosDefault.default.get("https://myflix-57495.herokuapp.com/movies").then((response)=>{
             this.setState({
@@ -22046,21 +22053,25 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
+    //change the cards between horizontal and vertical
     setSelectedView(view) {
         this.setState({
             selectedView: view
         });
     }
+    //change the state of the selected movie
     setSelectedMovie(movie) {
         this.setState({
             selectedMovie: movie
         });
     }
+    //set the state of the user to who is actually logged in
     onLoggedIn(user) {
         this.setState({
             user
         });
     }
+    // If a user is not registered, set registered state to false to bring up the registration page
     toggleRegisterView() {
         if (this.state.registered === true) this.setState({
             registered: false
@@ -22070,14 +22081,18 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
+        //define all the states
         const movies = this.state.movies;
         const selectedMovie = this.state.selectedMovie;
         const user = this.state.user;
         const registered = this.state.registered;
         const selectedView = this.state.selectedView;
+        //declare a variable that will be used to set an id for the <Row> component.  This will set the css to change the view
         let selectedViewFlex;
+        //If statements that looks at the view state and sets an id that will changes the css based on that
         if (selectedView === "2") selectedViewFlex = "flex-column";
         if (selectedView === "1") selectedViewFlex = "flex-row";
+        //If the user state is null and they are registered, bring up the login page
         if (!user && registered === true) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
             onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
@@ -22086,31 +22101,34 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 83
+                lineNumber: 97
             },
             __self: this
         }));
+        //if the registered state is changed to false, bring up the registration page
         if (registered === false) return(/*#__PURE__*/ _reactDefault.default.createElement(_registrationView.RegistrationView, {
             onRegistration: ()=>this.toggleRegisterView()
             ,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 89
+                lineNumber: 104
             },
             __self: this
         }));
+        //If the movie state is empty or there is an error accessing the database, this if runs
         if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "main-view",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 93
+                lineNumber: 109
             },
             __self: this
         }));
+        //If a movie has been selected from out of the movie cards, this runs to display that movies' information
         if (selectedMovie) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 98
+                lineNumber: 115
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
@@ -22121,14 +22139,14 @@ class MainView extends _reactDefault.default.Component {
             username: user,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 99
+                lineNumber: 116
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "justify-content-md-center",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 100
+                lineNumber: 117
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
@@ -22136,7 +22154,7 @@ class MainView extends _reactDefault.default.Component {
             xs: 8,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 101
+                lineNumber: 118
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_movieView.MovieView, {
@@ -22146,14 +22164,15 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 102
+                lineNumber: 119
             },
             __self: this
         })))));
+        //If all other if statements don't run, the movie card view is brought up
         return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 110
+                lineNumber: 128
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
@@ -22164,7 +22183,7 @@ class MainView extends _reactDefault.default.Component {
             username: user,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 111
+                lineNumber: 129
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
@@ -22172,7 +22191,7 @@ class MainView extends _reactDefault.default.Component {
             id: selectedViewFlex,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 112
+                lineNumber: 130
             },
             __self: this
         }, movies.map((movie)=>{
@@ -22184,7 +22203,7 @@ class MainView extends _reactDefault.default.Component {
                 key: movie._id,
                 __source: {
                     fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 115
+                    lineNumber: 133
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
@@ -22195,7 +22214,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/jamesrutkowski/myFlix-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 116
+                    lineNumber: 134
                 },
                 __self: this
             })));
@@ -22228,12 +22247,15 @@ var _cardDefault = parcelHelpers.interopDefault(_card);
 var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends _reactDefault.default.Component {
     render() {
+        //set the props to variables
         const movie = this.props.movieData;
         const onMovieClick = this.props.onMovieClick;
         const selectedView = this.props.selectedView;
+        //These variables will be used to set class to chnage the card display
         let selectedStyle1;
         let selectedStyle2;
         let selectedStyle3;
+        //If the user wants the horizontal cards, set the variables to horizontal values
         if (selectedView === "2") {
             selectedStyle1 = "horizontal-card";
             selectedStyle2 = "horizontal-image-size";
@@ -22248,7 +22270,7 @@ class MovieCard extends _reactDefault.default.Component {
             className: selectedStyle1,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 29
+                lineNumber: 34
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
@@ -22258,7 +22280,7 @@ class MovieCard extends _reactDefault.default.Component {
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 30
+                lineNumber: 35
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Body, {
@@ -22268,20 +22290,20 @@ class MovieCard extends _reactDefault.default.Component {
             className: selectedStyle3,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 35
+                lineNumber: 40
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
             bsPrefix: "overflow-handle",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 36
+                lineNumber: 41
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Text, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 37
+                lineNumber: 42
             },
             __self: this
         }, movie.Description))));
@@ -23404,7 +23426,7 @@ class MovieView extends _reactDefault.default.Component {
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
             variant: "top",
-            className: "movie-view-image",
+            id: "movie-view-image",
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
@@ -23443,7 +23465,7 @@ class MovieView extends _reactDefault.default.Component {
             },
             __self: this
         }, movie.Description)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
-            className: "movie-view-button",
+            id: "movie-view-button",
             variant: "secondary",
             onClick: ()=>onBackClick()
             ,
@@ -37027,17 +37049,22 @@ parcelHelpers.export(exports, "NavView", ()=>NavView
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
+//images must be imported with the url:  part before them to work with parcel.
+//These images will be displayed to give users a visual hint about what the view will change to.
 var _verticalViewPng = require("url:./nav-view-images/Vertical-view.png");
 var _verticalViewPngDefault = parcelHelpers.interopDefault(_verticalViewPng);
 var _horizontalViewPng = require("url:./nav-view-images/Horizontal-view.png");
 var _horizontalViewPngDefault = parcelHelpers.interopDefault(_horizontalViewPng);
 var _navViewScss = require("./nav-view.scss");
 function NavView(props) {
+    //set the imported props to variables
     const user = props.username;
     const changeView = props.changeView;
     const view = props.selectedView;
+    //These variables will be used to set a className
     let verticalButton;
     let horizontalButton;
+    //Both variables must be defined to prevent an empty class.  none is basically just a placeholder
     if (view === "2") {
         horizontalButton = "horizontal";
         verticalButton = "none";
@@ -37055,34 +37082,34 @@ function NavView(props) {
         expand: "md",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 31
+            lineNumber: 38
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 32
+            lineNumber: 39
         },
         __self: this
     }, "myFlix"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
         "aria-controls": "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 33
+            lineNumber: 40
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
         id: "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 34
+            lineNumber: 41
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 35
+            lineNumber: 42
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown, {
@@ -37090,41 +37117,41 @@ function NavView(props) {
         id: "basic-nav-dropdown",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 36
+            lineNumber: 43
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action1",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 37
+            lineNumber: 44
         },
         __self: this
     }, "MyProfile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 38
+            lineNumber: 45
         },
         __self: this
     }, "Favorites"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Divider, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 39
+            lineNumber: 46
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action3",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 40
+            lineNumber: 47
         },
         __self: this
     }, "Log-out"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
         inline: true,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 43
+            lineNumber: 50
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -37133,7 +37160,7 @@ function NavView(props) {
         className: "mr-sm-2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 44
+            lineNumber: 51
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -37141,21 +37168,21 @@ function NavView(props) {
         variant: "secondary",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 45
+            lineNumber: 52
         },
         __self: this
     }, "Submit")), /*#__PURE__*/ _reactDefault.default.createElement("div", {
         id: "view-select-block",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 47
+            lineNumber: 54
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
         className: `view-button ${verticalButton}`,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 48
+            lineNumber: 55
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
@@ -37167,14 +37194,14 @@ function NavView(props) {
         src: _verticalViewPngDefault.default,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 48
+            lineNumber: 55
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement("button", {
         className: `view-button ${horizontalButton}`,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 49
+            lineNumber: 56
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
@@ -37186,7 +37213,7 @@ function NavView(props) {
         src: _horizontalViewPngDefault.default,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 49
+            lineNumber: 56
         },
         __self: this
     }))))));

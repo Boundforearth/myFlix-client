@@ -42,12 +42,12 @@ p {
   flex-direction: column !important;
   justify-content: center !important;
 }
-.movie-view-image {
+#movie-view-image {
   max-width: 20rem;
 }
 
-.movie-view-button {
-  display: block !important;
+#movie-view-button {
+  display: block;
   width: 33%;
   margin: auto;
 }
