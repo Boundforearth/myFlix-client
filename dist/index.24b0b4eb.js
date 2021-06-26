@@ -22114,6 +22114,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
+            selectedView: selectedView,
             changeView: (view)=>{
                 this.setSelectedView(view);
             },
@@ -22156,6 +22157,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navView.NavView, {
+            selectedView: selectedView,
             changeView: (view)=>{
                 this.setSelectedView(view);
             },
@@ -22236,7 +22238,6 @@ class MovieCard extends _reactDefault.default.Component {
             selectedStyle1 = "horizontal-card";
             selectedStyle2 = "horizontal-image-size";
             selectedStyle3 = "horizontal-body";
-            console.log("grapes");
         } else {
             selectedStyle1 = "vertical-card";
             selectedStyle2 = "vertical-image-size";
@@ -22244,43 +22245,43 @@ class MovieCard extends _reactDefault.default.Component {
         }
         return(/*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default, {
             bsPrefix: "card-styling",
-            id: selectedStyle1,
+            className: selectedStyle1,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 30
+                lineNumber: 29
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Img, {
-            id: selectedStyle2,
-            className: "movie-card-img",
+            alt: `${movie} picture`,
+            className: `movie-card-img ${selectedStyle2}`,
             varient: "top",
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 31
+                lineNumber: 30
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Body, {
             onClick: ()=>onMovieClick(movie)
             ,
             bsPrefix: "body-sizing",
-            id: selectedStyle3,
+            className: selectedStyle3,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 36
+                lineNumber: 35
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Title, {
             bsPrefix: "overflow-handle",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 37
+                lineNumber: 36
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_cardDefault.default.Text, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 38
+                lineNumber: 37
             },
             __self: this
         }, movie.Description))));
@@ -23403,6 +23404,7 @@ class MovieView extends _reactDefault.default.Component {
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
             variant: "top",
+            className: "movie-view-image",
             src: movie.ImagePath,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
@@ -23412,41 +23414,42 @@ class MovieView extends _reactDefault.default.Component {
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 30
+                lineNumber: 31
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 31
+                lineNumber: 32
             },
             __self: this
         }, movie.Title), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Subtitle, {
             className: "mb-2 text-muted",
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 32
+                lineNumber: 33
             },
             __self: this
         }, "Genre: ", movie.Genre.Name), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 33
+                lineNumber: 34
             },
             __self: this
         }, "Director: ", movie.Director.Name), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 34
+                lineNumber: 35
             },
             __self: this
         }, movie.Description)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            className: "movie-view-button",
             variant: "secondary",
             onClick: ()=>onBackClick()
             ,
             __source: {
                 fileName: "/Users/jamesrutkowski/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 36
+                lineNumber: 37
             },
             __self: this
         }, "Back")));
@@ -36760,6 +36763,7 @@ function RegistrationView(props) {
         props.onRegistration();
     };
     return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+        id: "registration-form-styling",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/registration-view/registration-view.jsx",
             lineNumber: 19
@@ -36896,6 +36900,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
+var _loginViewScss = require("./login-view.scss");
 var _s = $RefreshSig$();
 function LoginView(props) {
     _s();
@@ -36913,22 +36918,23 @@ function LoginView(props) {
         props.notRegistered();
     };
     return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+        id: "form-styling",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 23
+            lineNumber: 25
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicEmail",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 24
+            lineNumber: 26
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 25
+            lineNumber: 27
         },
         __self: this
     }, "Username"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -36939,20 +36945,20 @@ function LoginView(props) {
         placeholder: "Username...",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 26
+            lineNumber: 28
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicPassword",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 29
+            lineNumber: 31
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 30
+            lineNumber: 32
         },
         __self: this
     }, "Password"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -36963,16 +36969,23 @@ function LoginView(props) {
         placeholder: "Password",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 31
+            lineNumber: 33
         },
         __self: this
-    })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+    })), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+        className: "button-group",
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 35
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
         variant: "secondary",
         type: "button",
         onClick: handleSubmit,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 33
+            lineNumber: 36
         },
         __self: this
     }, "Sign in"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -36981,10 +36994,10 @@ function LoginView(props) {
         onClick: needToRegister,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 34
+            lineNumber: 37
         },
         __self: this
-    }, "Register")));
+    }, "Register"))));
 }
 _s(LoginView, "lLPiMBLCwTVrGnt2k2TCjpjjkQI=");
 _c = LoginView;
@@ -37000,7 +37013,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","prop-types":"4dfy5","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","react-bootstrap":"4n7hB"}],"4UkDq":[function(require,module,exports) {
+},{"react":"3b2NM","prop-types":"4dfy5","@parcel/transformer-js/src/esmodule-helpers.js":"64uBx","../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2TAi6","react-bootstrap":"4n7hB","./login-view.scss":"nLqBb"}],"nLqBb":[function() {},{}],"4UkDq":[function(require,module,exports) {
 var helpers = require("../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37022,9 +37035,19 @@ var _navViewScss = require("./nav-view.scss");
 function NavView(props) {
     const user = props.username;
     const changeView = props.changeView;
+    const view = props.selectedView;
+    let verticalButton;
+    let horizontalButton;
+    if (view === "2") {
+        horizontalButton = "horizontal";
+        verticalButton = "none";
+    } else {
+        verticalButton = "vertical";
+        horizontalButton = "none";
+    }
     const handleChange = (e)=>{
-        let view = e.target.dataset.value;
-        changeView(view);
+        let view1 = e.target.dataset.value;
+        changeView(view1);
     };
     return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
         bg: "light",
@@ -37032,34 +37055,34 @@ function NavView(props) {
         expand: "md",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 17
+            lineNumber: 31
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 18
+            lineNumber: 32
         },
         __self: this
     }, "myFlix"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
         "aria-controls": "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 19
+            lineNumber: 33
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
         id: "basic-navbar-nav",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 20
+            lineNumber: 34
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 21
+            lineNumber: 35
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown, {
@@ -37067,41 +37090,41 @@ function NavView(props) {
         id: "basic-nav-dropdown",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 22
+            lineNumber: 36
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action1",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 23
+            lineNumber: 37
         },
         __self: this
     }, "MyProfile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 24
+            lineNumber: 38
         },
         __self: this
     }, "Favorites"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Divider, {
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 25
+            lineNumber: 39
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "#action3",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 26
+            lineNumber: 40
         },
         __self: this
     }, "Log-out"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
         inline: true,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 29
+            lineNumber: 43
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -37110,7 +37133,7 @@ function NavView(props) {
         className: "mr-sm-2",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 30
+            lineNumber: 44
         },
         __self: this
     }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -37118,17 +37141,25 @@ function NavView(props) {
         variant: "secondary",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 31
+            lineNumber: 45
         },
         __self: this
     }, "Submit")), /*#__PURE__*/ _reactDefault.default.createElement("div", {
         id: "view-select-block",
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 33
+            lineNumber: 47
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
+        className: `view-button ${verticalButton}`,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
+            lineNumber: 48
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
+        alt: "View selection image",
         className: "view-choice",
         alternate: "Change to vertical view",
         onClick: handleChange,
@@ -37136,10 +37167,18 @@ function NavView(props) {
         src: _verticalViewPngDefault.default,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 34
+            lineNumber: 48
         },
         __self: this
-    }), /*#__PURE__*/ _reactDefault.default.createElement("img", {
+    })), /*#__PURE__*/ _reactDefault.default.createElement("button", {
+        className: `view-button ${horizontalButton}`,
+        __source: {
+            fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
+            lineNumber: 49
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("img", {
+        alt: "View selection image",
         className: "view-choice",
         alternate: "Change to horizontal view",
         onClick: handleChange,
@@ -37147,10 +37186,10 @@ function NavView(props) {
         src: _horizontalViewPngDefault.default,
         __source: {
             fileName: "/Users/jamesrutkowski/myFlix-client/src/components/nav-view/nav-view.jsx",
-            lineNumber: 35
+            lineNumber: 49
         },
         __self: this
-    })))));
+    }))))));
 }
 _c = NavView;
 var _c;

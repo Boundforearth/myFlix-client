@@ -1,8 +1,8 @@
 .my-flix {
   color: steelblue;
 }
-#vertical-card {
-  max-width: 14rem;
+.vertical-card {
+  max-width: 14rem !important;
 }
 
 .card-styling {
@@ -13,8 +13,8 @@
   height: 20rem;
 }
 
-#vertical-body {
-  height: 15rem;
+.vertical-body {
+  height: 15rem !important;
 }
 
 .body-sizing {
@@ -28,22 +28,42 @@ p {
   text-overflow: ellipsis;
 }
 
-#horizontal-card {
+.horizontal-card {
+  display: flex !important;
+}
+
+.horizontal-image-size {
+  height: 10rem !important;
+  width: 7rem !important;
+}
+
+.horizontal-body {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.movie-view-image {
+  max-width: 20rem;
+}
+
+.movie-view-button {
+  display: block !important;
+  width: 33%;
+  margin: auto;
+}
+#registration-form-styling {
+  max-width: 20rem;
+  margin: auto;
+}
+#form-styling {
+  max-width: 20rem;
+  margin: auto;
+}
+
+.button-group {
   display: flex;
+  justify-content: space-around;
 }
-
-#horizontal-image-size {
-  height: 10rem;
-  width: 7rem;
-}
-
-#horizontal-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
 #view-select-block {
   width: 10rem;
   display: inline-block;
@@ -51,12 +71,26 @@ p {
   border-radius: 50%;
 }
 
-.view-1 {
-  display: inline-block;
-  cursor: pointer;
-  background-color: black;
-  height: 10rem;
-  width: 10rem;
+.view-choice {
+  margin-left: 2px;
+}
+
+.view-button {
+  padding: 0;
+  border-color: #d4d1d1;
+  margin-left: 2px;
+}
+
+.vertical {
+  border-color: black;
+}
+
+.horizontal {
+  border-color: black;
+}
+
+.view-button:hover {
+  border-color: gray;
 }
 body {
   padding-top: 5rem;
