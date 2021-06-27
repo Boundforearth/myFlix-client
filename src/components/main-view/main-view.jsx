@@ -42,6 +42,21 @@ export class MainView extends React.Component {
       });
   }
 
+  getMovies(token) {
+    axios.get("https://myflix-57495.herokuapp.com/movies", {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    .then((response) => {
+      //Assign the result to the state
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+  }
+
   //change the cards between horizontal and vertical
   setSelectedView(view) {
     this.setState({
@@ -57,10 +72,14 @@ export class MainView extends React.Component {
   }
 
   //set the state of the user to who is actually logged in
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+    localStorage.setItem("token", authData.token);
+    localStorgae.setItem("user", authData.user.Username);
+    this.getMovies(authData.token);
   }
 
   // If a user is not registered, set registered state to false to bring up the registration page
@@ -94,7 +113,7 @@ export class MainView extends React.Component {
     }
 
     //If the user state is null and they are registered, bring up the login page
-   if(!user && (registered === true)) {return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} 
+   if(!user && (registered === true)) {return <LoginView onLoggedIn={(authData) => this.onLoggedIn(authData)} 
     notRegistered={() => {
       this.toggleRegisterView();
       }} />};
