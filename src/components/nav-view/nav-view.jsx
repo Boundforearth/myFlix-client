@@ -13,6 +13,8 @@ export function NavView(props) {
   const user = props.username;
   const changeView = props.changeView;
   const view = props.selectedView;
+  const logout = props.onLogout;
+
 
   //These variables will be used to set a className
   let verticalButton
@@ -41,10 +43,10 @@ export function NavView(props) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown title={user} id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action1">MyProfile</NavDropdown.Item>
-            <NavDropdown.Item href="#action2">Favorites</NavDropdown.Item>
+            <NavDropdown.Item as="button" >MyProfile</NavDropdown.Item>
+            <NavDropdown.Item as="button">Favorites</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action3">Log-out</NavDropdown.Item>
+            <NavDropdown.Item as="button" onClick={() => {logout()}}>Log-out</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Form inline>
