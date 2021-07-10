@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 import "./movie-card.scss";
 
@@ -8,7 +9,6 @@ export class MovieCard extends React.Component {
   render() {
     //set the props to variables
     const movie = this.props.movieData;
-    const onMovieClick = this.props.onMovieClick;
     const selectedView = this.props.selectedView;
 
     //These variables will be used to set class to chnage the card display
@@ -31,17 +31,19 @@ export class MovieCard extends React.Component {
     }
 
     return (
-      <Card bsPrefix="card-styling" className={selectedStyle1}>
-        <Card.Img 
-            alt={`${movie} picture`}
-            className={`movie-card-img ${selectedStyle2}`}
-            varient="top" 
-            src={movie.ImagePath} />
-        <Card.Body onClick={() => onMovieClick(movie)} bsPrefix="body-sizing" className={selectedStyle3}>
-          <Card.Title bsPrefix="overflow-handle">{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
-        </Card.Body>
-      </Card>
+      <Link to={`/movies/${movie._id}`}>
+        <Card bsPrefix="card-styling" className={selectedStyle1}>
+          <Card.Img 
+              alt={`${movie} picture`}
+              className={`movie-card-img ${selectedStyle2}`}
+              varient="top" 
+              src={movie.ImagePath} />
+          <Card.Body bsPrefix="body-sizing" className={selectedStyle3}>
+            <Card.Title bsPrefix="overflow-handle">{movie.Title}</Card.Title>
+            <Card.Text>{movie.Description}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     );
   }
 }
@@ -64,5 +66,4 @@ MovieCard.propTypes = {
     }).isRequired
 
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
 };
