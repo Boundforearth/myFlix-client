@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./login-view.scss"
 
@@ -18,17 +19,13 @@ export function LoginView(props) {
     })
     .then((response) => {
       const data = response.data;
-      props.onLoggedIn(data)
+      props.onLoggedIn(data);
     })
     .catch ((e) => {
-      console.log("Can not find that Username and Password")
+      console.error(e);
+      console.log("Can not find that Username and Password");
     })
   };
-
-  const needToRegister = (e) => {
-    e.preventDefault();
-    props.notRegistered();
-  }
 
   return (
     <Form id="form-styling">
@@ -43,13 +40,14 @@ export function LoginView(props) {
       </Form.Group>
       <div className="button-group">
         <Button variant="secondary" type="button" onClick={handleSubmit}>Sign in</Button>
-        <Button variant="secondary" type="button" onClick={needToRegister}>Register</Button>
+        <Link to="/register">
+          <Button variant="secondary" type="button">Register</Button>
+        </Link>
       </div>
     </Form>
   );
 };
 
 LoginView.propTypes = {
-  notRegistered: PropTypes.func.isRequired,
   onLoggedIn: PropTypes.func.isRequired
 }
