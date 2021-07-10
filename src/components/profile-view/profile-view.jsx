@@ -1,33 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 
 import "./profile-view.scss"
 
-let email;
-let birthdate;
+export function ProfileView(props) {
+  const [email, registeredEmail] = useState("");
+  const [birthdate, registeredBirthdate] = useState("")
 
-export class ProfileView extends React.Component {
-  componentDidMount() {
-    let user = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
+  const user = props.user;
+
+  let token = localStorage.getItem("token");
+
+  useEffect(() => {
     axios.get(`https://myflix-57495.herokuapp.com/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}})
-    .then((data) => {
-      console.log(data);
-      email = data.data.Email;
-      birthdate = data.data.Birthday;
+      .then((data) => {
+      registeredEmail(data.data.Email);
+      registeredBirthdate(data.data.Birthday);
       })
-    .catch((e) => {
+      .catch((e) => {
       console.log(e);
-    })
-  }
+      }), []
+    }
+  )
 
-  handleDelete (e) {
+  const handleDelete = (e) => {
     e.preventDefault();
-    let user = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
     axios.delete(`https://myflix-57495.herokuapp.com/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}})
       .then(() => {
@@ -41,10 +41,7 @@ export class ProfileView extends React.Component {
       })
   }
 
-  handleUserUpdates(update) {
-    let user = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
-
+  const handleUserUpdates = () => {
     let userInput = document.getElementById("username");
     let passwordInput = document.getElementById("new-password");
     let passwordCheckInput = document.getElementById("new-password-check");
@@ -55,7 +52,7 @@ export class ProfileView extends React.Component {
     let newEmail = emailInput.value;
     let newBirthday = birthdayInput.value;
     if(userInput.value === "") {
-      newUsername = user;
+      newUsername = user
     }
     else if(userInput.value < 5) {
       console.log("Pleas use a username with at least 5 characters");
@@ -81,56 +78,52 @@ export class ProfileView extends React.Component {
       Birthday: newBirthday
     }, {headers: {Authorization: `Bearer ${token}`}})
     .then((data) => {
-      console.log(data);
       alert("Your user info has been updates");
+      localStorage.removeItem("user");
+      localStorage.setItem("user", newUsername);
+      let newUser = localStorage.getItem("user");
+      props.setUser(newUser);
     })
     .catch((e) => {
       console.log(e);
     })
   }
 
-  render() {
-    const user = this.props.user;
-    const setUser = this.props.setUser;
-    console.log(email);
-    console.log(birthdate);
-    console.log("banana")
-    return (
-      <div>
-        <div role="user info block" className="user-info">
-          <h5>User Info</h5>
-          <p>Username: {user}</p>
-          <p>Email: {email}</p>
-          <p>Birthdate: {birthdate}</p>
-          <Button variant="secondary" onClick={this.handleDelete}>Delete Account</Button>
-        </div>
-        <h6>Update User Information</h6>
-          <Form id="username-update-form">
-            <Form.Group className="form-update">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" id="username"/>
-            </Form.Group>
-            <Form.Group className="form-update">
-              <Form.Label>New or Current Password</Form.Label>
-              <Form.Control type="password" id="new-password"/>
-            </Form.Group>
-            <Form.Group className="form-update">
-              <Form.Label>Verify Password</Form.Label>
-              <Form.Control type="password" id="new-password-check"/>
-            </Form.Group>
-            <Form.Group className="form-update">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" id="new-email"/>
-            </Form.Group>
-            <Form.Group  className="form-update">
-              <Form.Label>Birthday</Form.Label>
-             <Form.Control type="text" id="new-birthday"/>
-            </Form.Group>
-            <Button onClick={() => {this.handleUserUpdates;
-            } }>Submit</Button>
-          </Form>
-      
-      </div>
-    );
-  }
+  return (
+    <div>
+    <div role="user info block" className="user-info">
+      <h5>User Info</h5>
+      <p>Username: {user}</p>
+      <p>Email: {email}</p>
+      <p>Birthdate: {birthdate}</p>
+      <Button variant="secondary" onClick={handleDelete}>Delete Account</Button>
+    </div>
+    <h6>Update User Information</h6>
+      <Form id="username-update-form">
+        <Form.Group className="form-update">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" id="username"/>
+        </Form.Group>
+        <Form.Group className="form-update">
+          <Form.Label>New or Current Password</Form.Label>
+          <Form.Control type="password" id="new-password"/>
+        </Form.Group>
+        <Form.Group className="form-update">
+          <Form.Label>Verify Password</Form.Label>
+          <Form.Control type="password" id="new-password-check"/>
+        </Form.Group>
+        <Form.Group className="form-update">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" id="new-email"/>
+        </Form.Group>
+        <Form.Group  className="form-update">
+          <Form.Label>Birthday</Form.Label>
+         <Form.Control type="text" id="new-birthday"/>
+        </Form.Group>
+        <Button variant="secondary" onClick={handleUserUpdates}>Submit</Button>
+      </Form>
+  
+  </div>
+)
 }
+
