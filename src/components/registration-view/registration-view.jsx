@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./registration-view.scss"
 
@@ -12,7 +14,22 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onRegistration();
+    axios.post("https://myflix-57495.herokuapp.com/users", {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self');
+      alert("You have regiseterd!  Please login.")
+      //'_self' prevents the page from opening in a new tab
+    })
+    .catch ((error) => {
+      console.log("error registering the user")
+    });
   }
 
   return (
@@ -33,11 +50,10 @@ export function RegistrationView(props) {
         <Form.Label>Birthday</Form.Label>
         <Form.Control type="date" value={birthday} onChange={(e) => registerBirthday(e.target.value)} />
       </Form.Group>
-      <Button variant="secondary" onClick={handleSubmit}>Register</Button>
+      <div className="button-group">
+        <Button variant="secondary" onClick={handleSubmit}>Register</Button> 
+        <Link to="/"><Button variant="secondary">Already Registered</Button></Link> 
+      </div>
     </Form>
   );
-}
-
-RegistrationView.propTypes = {
-  onRegistration: PropTypes.func.isRequired
 }
