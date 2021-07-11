@@ -3,6 +3,7 @@
 }
 .vertical-card {
   max-width: 14rem !important;
+  color: black !important;
 }
 
 .card-styling {
@@ -41,6 +42,7 @@ p {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  color: black !important;
 }
 #movie-view-image {
   max-width: 20rem;
@@ -49,7 +51,6 @@ p {
 #movie-view-button {
   display: block;
   width: 33%;
-  margin: auto;
 }
 #registration-form-styling {
   max-width: 20rem;
@@ -63,6 +64,7 @@ p {
 .button-group {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 3rem;
 }
 #view-select-block {
   width: 10rem;
@@ -92,6 +94,18 @@ p {
 .view-button:hover {
   border-color: gray;
 }
+
+#no-nav-bar-block {
+  display: none;
+}
+
+.link-styling {
+  color: black;
+}
+
+.link-styling:hover {
+  color: black;
+}
 body {
   padding-top: 5rem;
 }
@@ -105,7 +119,25 @@ body {
   justify-content: center;
 }
 
+#flex-row {
+  flex-wrap: wrap;
+}
+
 #flex-column {
   flex-direction: column;
+}
+
+.link {
+  color: black;
+}
+
+
+.form-update {
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+.user-info {
+  margin-bottom: 3rem;
 }
 /*# sourceMappingURL=index.0e995c6f.css.map */
