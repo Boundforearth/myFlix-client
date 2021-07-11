@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
     }
     else {axios.post(`https://myflix-57495.herokuapp.com/users/${user}/mylist/${movie}`, "", 
     {headers: {Authorization: `Bearer ${token}`}})
-    .then((data) => {
+    .then(() => {
       this.props.addFavorite(movie);
       alert("This movie has been added to your favorites!");
     })
