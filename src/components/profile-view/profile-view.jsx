@@ -6,8 +6,10 @@ import { Form, Button } from "react-bootstrap";
 import "./profile-view.scss"
 
 export function ProfileView(props) {
-  const [email, registeredEmail] = useState("");
-  const [birthdate, registeredBirthdate] = useState("")
+  const [email, setEmail] = useState("");
+  const [birthdate, setBirthdate] = useState("")
+  const [form, setForm] = useState({});
+  const [errors, setErrors] = useState({});
 
   const user = props.user;
 
@@ -17,14 +19,48 @@ export function ProfileView(props) {
     axios.get(`https://myflix-57495.herokuapp.com/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}})
       .then((data) => {
-      registeredEmail(data.data.Email);
-      registeredBirthdate(data.data.Birthday);
+      setEmail(data.data.Email);
+      setBirthdate(data.data.Birthday);
+      console.log("This is a problem, it runs three times")
       })
       .catch((e) => {
       console.log(e);
       }), []
     }
   )
+
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value
+    })
+
+    if( !!errors[field] ) {
+      setErrors({
+        ...errors,
+        [field]: null
+      })
+    }
+  }
+
+  const errorHandling = () => {
+    const { username, password, passwordVerification, email} = form;
+    const newErrors = {};
+    if( !username || username === "" || username.length < 5) {
+      newErrors.username = "Please enter a Username with at least 5 characters";
+    }
+    if (!password || password.length < 8) {
+      newErrors.password = "Please enter a password of at least 8 characters";
+    }
+    else if(password !== passwordVerification) {
+      newErrors.password = "Your passwords don't match";
+    }
+    if(email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+      newErrors.email = "Please enter a valid email"
+    }
+    return newErrors
+  }
+
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -40,53 +76,31 @@ export function ProfileView(props) {
         console.log(e);
       })
   }
-
-  const handleUserUpdates = () => {
-    let userInput = document.getElementById("username");
-    let passwordInput = document.getElementById("new-password");
-    let passwordCheckInput = document.getElementById("new-password-check");
-    let emailInput = document.getElementById("new-email");
-    let birthdayInput = document.getElementById("new-birthday");
-    let newUsername;
-    let newPassword;
-    let newEmail = emailInput.value;
-    let newBirthday = birthdayInput.value;
-    if(userInput.value === "") {
-      newUsername = user
+  const handleUserUpdates = (e) => {
+    e.preventDefault();
+    const newErrors = errorHandling();
+    if ( Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      console.log(newErrors);
     }
-    else if(userInput.value < 5) {
-      console.log("Pleas use a username with at least 5 characters");
+    else{ 
+        axios.put(`https://myflix-57495.herokuapp.com/users/${user}`, {
+        Username: form.username,
+        Password: form.password,
+        Email: form.email,
+        Birthday: form.birthday
+      }, {headers: {Authorization: `Bearer ${token}`}})
+      .then((data) => {
+        alert("Your user info has been updates");
+        localStorage.removeItem("user");
+        localStorage.setItem("user", form.username);
+        props.setUser(form.username);
+        window.open(`${form.username}`, '_self')
+      })
+      .catch((e) => {
+        console.log(e);
+      })
     }
-    else {
-      newUsername = userInput.value;
-    }
-
-    if (passwordInput.value !== passwordCheckInput.value) {
-      console.log("The passwords need to match");
-    }
-    else if(passwordInput.value < 8) {
-      console.log("Pleas use a password with at least 8 characters");
-    }
-    else {
-      newPassword = passwordInput.value
-    }
-
-    axios.put(`https://myflix-57495.herokuapp.com/users/${user}`, {
-      Username: newUsername,
-      Password: newPassword,
-      Email: newEmail,
-      Birthday: newBirthday
-    }, {headers: {Authorization: `Bearer ${token}`}})
-    .then((data) => {
-      alert("Your user info has been updates");
-      localStorage.removeItem("user");
-      localStorage.setItem("user", newUsername);
-      let newUser = localStorage.getItem("user");
-      props.setUser(newUser);
-    })
-    .catch((e) => {
-      console.log(e);
-    })
   }
 
   return (
@@ -100,25 +114,56 @@ export function ProfileView(props) {
     </div>
     <h6>Update User Information</h6>
       <Form id="username-update-form">
-        <Form.Group className="form-update">
+        <Form.Group controlId="newUsername" className="form-update">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text" id="username"/>
+          <Form.Control 
+              type="text" 
+              onChange={(e) => setField("username", e.target.value)} 
+              isInvalid={!!errors.username}/>
+          <Form.Control.Feedback type="invalid">
+            {errors.username}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="form-update">
+
+
+
+        <Form.Group controlId="newPassword" className="form-update">
           <Form.Label>New or Current Password</Form.Label>
-          <Form.Control type="password" id="new-password"/>
+          <Form.Control 
+              type="password" 
+              onChange={(e) => setField("password", e.target.value)}
+              isInvalid={!!errors.password}/>
+          <Form.Control.Feedback type="invalid">
+            {errors.password}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="form-update">
-          <Form.Label>Verify Password</Form.Label>
-          <Form.Control type="password" id="new-password-check"/>
+
+
+        <Form.Group controlId="newPasswordVerify" className="form-update">
+          <Form.Label>Re-enter Password</Form.Label>
+          <Form.Control 
+              type="password" 
+              onChange={(e) => setField("passwordVerification", e.target.value)}/>
         </Form.Group>
-        <Form.Group className="form-update">
+
+
+        <Form.Group controlId="newEmail" className="form-update">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" id="new-email"/>
+          <Form.Control 
+            type="email" 
+            onChange={(e) => setField("email", e.target.value)}
+            isInvalid={!!errors.email}/>
+          <Form.Control.Feedback type="invalid">
+            {errors.email}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group  className="form-update">
+
+
+        <Form.Group  controlId="newBirthday" className="form-update">
           <Form.Label>Birthday</Form.Label>
-         <Form.Control type="text" id="new-birthday"/>
+         <Form.Control 
+            type="Date" 
+            onChange={(e) => setField("birthday", e.target.value)}/>
         </Form.Group>
         <Button variant="secondary" onClick={handleUserUpdates}>Submit</Button>
       </Form>
