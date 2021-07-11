@@ -1,0 +1,43 @@
+.vertical-card {
+  max-width: 14rem !important;
+  color: black !important;
+}
+
+.card-styling {
+  margin: 1rem;
+}
+
+.movie-card-img {
+  height: 20rem;
+}
+
+.vertical-body {
+  height: 15rem !important;
+}
+
+.body-sizing {
+  padding: .675rem;
+  cursor: pointer;
+}
+
+p {
+  max-height: 12rem;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+.horizontal-card {
+  display: flex !important;
+}
+
+.horizontal-image-size {
+  height: 10rem !important;
+  width: 7rem !important;
+}
+
+.horizontal-body {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: black !important;
+}
