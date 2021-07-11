@@ -137,10 +137,8 @@ export class MainView extends React.Component {
 
   render() {
     //define all the states
-    const movies = this.state.movies;
-    const user = this.state.user;
-    const selectedView = this.state.selectedView;
-    const currentUserFavorites = this.state.currentUserFavorites;
+    const { movies, user, selectedView, currentUserFavorites } = this.state
+
     //declare a variable that will be used to set an id for the <Row> component.  This will set the css to change the view
     let selectedViewFlex;
 
