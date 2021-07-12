@@ -6,8 +6,10 @@ import { Form, Button } from "react-bootstrap";
 import "./profile-view.scss"
 
 export function ProfileView(props) {
+  //these will be used to display the users information on their profile.
   const [email, setEmail] = useState("");
   const [birthdate, setBirthdate] = useState("")
+
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -16,6 +18,7 @@ export function ProfileView(props) {
   let token = localStorage.getItem("token");
 
   useEffect(() => {
+    //this runs three times, may need to be corrected
     axios.get(`https://myflix-57495.herokuapp.com/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}})
       .then((data) => {
@@ -92,9 +95,12 @@ export function ProfileView(props) {
       }, {headers: {Authorization: `Bearer ${token}`}})
       .then((data) => {
         alert("Your user info has been updates");
+        //change the user stored in local storage
         localStorage.removeItem("user");
         localStorage.setItem("user", form.username);
+        //change the state of the username
         props.setUser(form.username);
+        //redirect the user to their new profile page
         window.open(`${form.username}`, '_self')
       })
       .catch((e) => {

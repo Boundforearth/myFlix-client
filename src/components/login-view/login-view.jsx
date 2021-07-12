@@ -23,7 +23,7 @@ export function LoginView(props) {
     })
     .catch ((e) => {
       console.error(e);
-      console.log("Can not find that Username and Password");
+      alert("Can not find that Username and Password");
     })
   };
 

@@ -7,9 +7,13 @@ import { Link } from "react-router-dom";
 import "./registration-view.scss"
 
 export function RegistrationView(props) {
+  //state for form, which will be an object with username, password, birthday, email, and password verification keys
   const [form, setForm] = useState({});
+
+  //state for errors, which will be an object containing error messages
   const [errors, setErrors] = useState({});
 
+  //sets the state of form, resets the state of errors
   const setField = (field, value) => {
     setForm({
       ...form,
@@ -24,6 +28,7 @@ export function RegistrationView(props) {
     }
   }
 
+  //function to validate all the form inputs
   const errorHandling = () => {
     const { username, password, passwordVerification, email} = form;
     const newErrors = {};
@@ -46,13 +51,16 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //set the errors
     const newErrors = errorHandling();
+    //if there are errors, the if part will return them and the post reqyest will not run
     if ( Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       console.log(newErrors);
     }
 
     else {
+      //if no errors were found, this code runs
       axios.post("https://myflix-57495.herokuapp.com/users", {
         Username: form.username,
         Password: form.password,

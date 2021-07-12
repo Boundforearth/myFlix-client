@@ -32,12 +32,14 @@ export class MainView extends React.Component {
     };
   }
 
+  //used to add a new movie to the favorites list
   addFavorite(movie) {
     this.setState({
       currentUserFavorites: [...this.state.currentUserFavorites, movie]
     })
   }
 
+  //filters out the selected movie and removes it from the state
   deleteFavorite(movie) {
     this.setState({
       currentUserFavorites: this.state.currentUserFavorites.filter((m) => {return m !== movie})
@@ -93,6 +95,7 @@ export class MainView extends React.Component {
     })
   }
 
+  //Use to set the movies state
   setMovies(array) {
     this.setState({
       movies: array
@@ -106,13 +109,14 @@ export class MainView extends React.Component {
     })
   }
 
+  // use to set the user state
   setUser(user) {
     this.setState({
       user: user
     })
   }
 
-  //set the state of the user to who is actually logged in
+  //set the state of the user to who is actually logged in and grab their list of favorite movies
   onLoggedIn(authData) {
     this.setState({
       user: authData.user.Username,
@@ -124,9 +128,12 @@ export class MainView extends React.Component {
   }
 
   onLoggedOut() {
+    //remove local storage items
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    //move to login page
     window.open('/', '_self');
+    //reset the states
     this.setState({
       user: null,
       selectedView: 1,
@@ -159,7 +166,8 @@ export class MainView extends React.Component {
             if(!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
-            if (movies.length === 0) return <div className="main-view" />;
+            //assuming there are movies, map each movie to its own MovieCard
+            if (!movies.length) return <div className="main-view" />;
             return movies.map(m => (
               <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={m._id}>
                 <MovieCard selectedView={selectedView} movieData={m} />
@@ -167,20 +175,21 @@ export class MainView extends React.Component {
             ))
             }} />
         </Row>
+
         <Row className="main-view justify-content-md-center">
           <Route path="/register" render={() => {
+            //if someone is logged in, send them to the home page instead of the register page
             if (user) return <Redirect to="/" />
             return <Col>
             <RegistrationView />
           </Col>
           }} />
 
-
           <Route path="/movies/:movieId" render={({match, history}) => {
             if(!user) return <Col>
             <LoginView onLoggedIn={user => this.onLoggedIn(user)}/>
           </Col>
-            if (movies.length === 0) return <div className="main-view" />;
+            if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
               <MovieView addFavorite={(movie) => this.addFavorite(movie)} deleteFavorite={(movie) => this.deleteFavorite(movie)} favorites={currentUserFavorites} movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
             </Col>
@@ -191,7 +200,7 @@ export class MainView extends React.Component {
             if(!user) return <Col>
             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
           </Col>
-            if (movies.length === 0) return <div className="main-view" />;
+            if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
               <GenreView genre={movies.find(m => m.Genre.Name === match.params.genre).Genre} onBackClick={() => history.goBack()} />
             </Col>
@@ -202,7 +211,7 @@ export class MainView extends React.Component {
             if(!user) return <Col>
             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
           </Col>
-            if (movies.length === 0) return <div className="main-view" />;
+            if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
               <DirectorView director={movies.find(m => m.Director.Name === match.params.director).Director}
                 movies={movies.filter(m => m.Director.Name === match.params.director)}
@@ -217,7 +226,7 @@ export class MainView extends React.Component {
     this.toggleRegisterView();
     }}/>
             </Col>
-            if (movies.length === 0) return <div className="main-view" />;
+            if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
               <ProfileView setUser={(user) => this.setUser(user)} user={user} onBackClick={() => history.goBack()} />
             </Col>
@@ -228,8 +237,13 @@ export class MainView extends React.Component {
             if(!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
-            if (movies.length === 0) return <div className="main-view" />;
-            if (currentUserFavorites.length === 0) return <h3>Your Favorites List Is Empty</h3>
+            if (!movies.length) return <div className="main-view" />;
+
+            //if the user has no favorite movies, display this
+            if (!currentUserFavorites.length) return <h3>Your Favorites List Is Empty</h3>
+
+            //Create a list of all the movies with all the information based on the users favorites
+            //currentUserFavorites is only ID's, we need all the movie info
             let favoriteMovies = [];
               for(let i = 0; i < movies.length; i++) {
                 for(let j = 0; j < currentUserFavorites.length; j++) {
@@ -239,6 +253,7 @@ export class MainView extends React.Component {
                   }
                 }
               }
+              //map the new list of movies to their own cards called FavoritesView
             return favoriteMovies.map(m => (
               <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={m._id}>
                 <FavoritesView setMovies={(array) => this.setMovies(array)} user={user} selectedView={selectedView} movieData={m} favorites={currentUserFavorites}/>

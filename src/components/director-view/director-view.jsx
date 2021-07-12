@@ -8,7 +8,6 @@ import "./director-view.scss";
 export class DirectorView extends React.Component {
 render() {
   const director = this.props.director;
-  const movies = this.props.movies
   const onBackClick = this.props.onBackClick;
   return(
     <Card bsPrefix="movie-view-width">
