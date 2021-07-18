@@ -1,7 +1,19 @@
 import React from "react";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
+// #0
+import { setMovies } from "../../actions/actions";
+import MoviesList from "../movies-list/movies-list";
+
+/*
+#1 The rest of components import statements but without the MovieCard's 
+because it will be imported and used in the MoviesList component rather
+than in here
+*/
+
 
 //import other views to be used
 import { RegistrationView } from "../registration-view/registration-view";
@@ -16,13 +28,14 @@ import { NavView } from "../nav-view/nav-view";
 
 import "./main-view.scss";
 
-export class MainView extends React.Component {
+// Removed export?
+class MainView extends React.Component {
 
   //set the states
   constructor() {
     super();
     this.state = {
-      movies: [],
+      //movies removed
       user: null,
       currentUserFavorites: [],
       //Default view will be the vertical cards with images at the top
@@ -64,10 +77,8 @@ export class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then((response) => {
-      //Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
+      //Instead of this.setState, this.props.setMovies.  Actions and all
+      this.props.setMovies(response.data);
     })
     .catch(function(error) {
       console.log(error);
@@ -144,7 +155,8 @@ export class MainView extends React.Component {
 
   render() {
     //define all the states
-    const { movies, user, selectedView, currentUserFavorites } = this.state
+    const { user, selectedView, currentUserFavorites } = this.state;
+    let { movies } = this.props;
 
     //declare a variable that will be used to set an id for the <Row> component.  This will set the css to change the view
     let selectedViewFlex;
@@ -168,12 +180,15 @@ export class MainView extends React.Component {
             </Col>
             //assuming there are movies, map each movie to its own MovieCard
             if (!movies.length) return <div className="main-view" />;
-            return movies.map(m => (
-              <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={m._id}>
-                <MovieCard selectedView={selectedView} movieData={m} />
-              </Col>
-            ))
-            }} />
+            return <MoviesList movies={movies}/>
+            //movies.map(m => (
+              //<Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={m._id}>
+                //<MovieCard selectedView={selectedView} movieData={m} />
+              //</Col>
+           // ))
+            
+            }} 
+            />
         </Row>
 
         <Row className="main-view justify-content-md-center">
@@ -265,3 +280,9 @@ export class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return{ movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);
