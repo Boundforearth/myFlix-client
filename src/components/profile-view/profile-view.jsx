@@ -28,9 +28,9 @@ export function ProfileView(props) {
       })
       .catch((e) => {
       console.log(e);
-      }), []
-    }
-  )
+      });
+    }, []);
+  
 
   const setField = (field, value) => {
     setForm({
