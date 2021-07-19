@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { addFavorite, deleteFavorite } from '../../actions/actions';
 
 import "./movie-view.scss"
 import axios from "axios";
 let addOrDeleteButton
-export class MovieView extends React.Component {
+class MovieView extends React.Component {
 
   updateFavorite (value, movie) {
     let user = localStorage.getItem("user");
@@ -16,6 +18,7 @@ export class MovieView extends React.Component {
       {
         headers: {Authorization: `Bearer ${token}`}})
       .then(() => {
+        console.log(movie);
         this.props.deleteFavorite(movie);
         alert("The movie has been deleted from your favorites");
       })
@@ -52,7 +55,7 @@ export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick, favorites} = this.props
     this.checkFavorites(movie._id, favorites);
-    
+
     return(
       <Card bsPrefix="movie-view-width">
         <Card.Img 
@@ -94,3 +97,13 @@ MovieView.propTypes = {
 
   }).isRequired,
 }
+
+let mapStateToProps = state => {
+  return { 
+    movies: state.movies,
+    user: state.user,
+    currentFavorites: state.currentFavorites
+   }
+}
+
+export default connect(mapStateToProps, { addFavorite, deleteFavorite } )(MovieView);
