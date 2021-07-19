@@ -9,13 +9,7 @@ import Horizontal from "url:./nav-view-images/Horizontal-view.png";
 
 import "./nav-view.scss"
 
-export function NavView(props) {
-  //set the imported props to variables
-  const user = props.username;
-  const changeView = props.changeView;
-  const view = props.selectedView;
-  const logout = props.onLogout;
-
+export function NavView({username, changeView, selectedView, onLogout}) {
 
   //These variables will be used to set a className
   let verticalButton;
@@ -24,7 +18,7 @@ export function NavView(props) {
 
 
   //Both variables must be defined to prevent an empty class.  none is basically just a placeholder
-  if (view === "2") {
+  if (selectedView === "2") {
     horizontalButton = "horizontal";
     verticalButton = "none";
   }
@@ -34,7 +28,7 @@ export function NavView(props) {
     horizontalButton = "none";
   }
 
-  if(!user) {
+  if(!username) {
     navigationDisplay = "no-nav-bar-block";
   }
   else {
@@ -51,11 +45,11 @@ export function NavView(props) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavDropdown title={user} id="basic-nav-dropdown">
-            <NavDropdown.Item as="button"><Link className="link-styling" to={`/users/${user}`}>MyProfile</Link></NavDropdown.Item>
-            <NavDropdown.Item as="button"><Link className="link-styling" to={`/myfavorites/${user}`}>Favorites</Link></NavDropdown.Item>
+          <NavDropdown title={username} id="basic-nav-dropdown">
+            <NavDropdown.Item as="button"><Link className="link-styling" to={`/users/${username}`}>MyProfile</Link></NavDropdown.Item>
+            <NavDropdown.Item as="button"><Link className="link-styling" to={`/myfavorites/${username}`}>Favorites</Link></NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item as="button" onClick={() => {logout()}}>Log-out</NavDropdown.Item>
+            <NavDropdown.Item as="button" onClick={() => {onLogout()}}>Log-out</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <div>
