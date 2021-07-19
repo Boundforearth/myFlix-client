@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { setUser } from "../../actions/actions";
 
 import "./profile-view.scss"
+
+const mapStateToProps = state => {
+  const { user } = state;
+  return { user };
+};
 
 export function ProfileView(props) {
   //these will be used to display the users information on their profile.
@@ -13,23 +20,20 @@ export function ProfileView(props) {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
-  const user = props.user;
+  const { user } = props;
 
   let token = localStorage.getItem("token");
 
   useEffect(() => {
-    //this runs three times, may need to be corrected
     axios.get(`https://myflix-57495.herokuapp.com/users/${user}`, {
       headers: {Authorization: `Bearer ${token}`}})
       .then((data) => {
       setEmail(data.data.Email);
       setBirthdate(data.data.Birthday);
-      console.log("This is a problem, it runs three times")
       })
       .catch((e) => {
       console.log(e);
-      }), []
-    }
+      })}, []
   )
 
   const setField = (field, value) => {
@@ -72,6 +76,7 @@ export function ProfileView(props) {
       .then(() => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        props.setUser('');
         alert(`${user}'s account has been deleted!`);
         window.open('/', '_self');
       }).
@@ -178,3 +183,5 @@ export function ProfileView(props) {
 )
 }
 
+
+export default connect(mapStateToProps, { setUser } )(ProfileView);
