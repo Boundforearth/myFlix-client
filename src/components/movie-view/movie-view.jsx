@@ -53,8 +53,9 @@ class MovieView extends React.Component {
 
 
   render() {
-    const { movie, onBackClick, favorites} = this.props
-    this.checkFavorites(movie._id, favorites);
+    const { movie, onBackClick, currentFavorites} = this.props
+    console.log(currentFavorites)
+    this.checkFavorites(movie._id, currentFavorites);
 
     return(
       <Card bsPrefix="movie-view-width">
@@ -65,8 +66,8 @@ class MovieView extends React.Component {
           />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted"><Link to={`/genres/${movie.Genre.Name}`}>Genre: {movie.Genre.Name}</Link></Card.Subtitle>
-          <Card.Text><Link to={`/directors/${movie.Director.Name}`}>Director: {movie.Director.Name}</Link></Card.Text>
+          <Card.Subtitle className="mb-2 text-muted"><Link className="link-styling" to={`/genres/${movie.Genre.Name}`}>Genre: {movie.Genre.Name}</Link></Card.Subtitle>
+          <Card.Text><Link className="link-styling" to={`/directors/${movie.Director.Name}`}>Director: {movie.Director.Name}</Link></Card.Text>
           <Card.Text>{movie.Description}</Card.Text>
         </Card.Body>
         <div className="button-group">
