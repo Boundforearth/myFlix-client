@@ -1,6 +1,8 @@
 import React from "react";
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { setView } from "../../actions/actions"
 
 //images must be imported with the url:  part before them to work with parcel.
 //These images will be displayed to give users a visual hint about what the view will change to.
@@ -9,7 +11,12 @@ import Horizontal from "url:./nav-view-images/Horizontal-view.png";
 
 import "./nav-view.scss"
 
-export function NavView({username, changeView, selectedView, onLogout}) {
+const mapStateToProps = state => {
+  const { user, selectedView } = state;
+  return { user, selectedView };
+};
+
+function NavView({user, selectedView, setView, onLogout}) {
 
   //These variables will be used to set a className
   let verticalButton;
@@ -28,7 +35,7 @@ export function NavView({username, changeView, selectedView, onLogout}) {
     horizontalButton = "none";
   }
 
-  if(!username) {
+  if(!user) {
     navigationDisplay = "no-nav-bar-block";
   }
   else {
@@ -37,7 +44,7 @@ export function NavView({username, changeView, selectedView, onLogout}) {
 
   const handleChange = (e) => {
     let view = e.target.dataset.value;
-    changeView(view);
+    setView(view);
   }
   return (
     <Navbar bg="light" fixed="top" expand="md" id={navigationDisplay}>
@@ -45,9 +52,9 @@ export function NavView({username, changeView, selectedView, onLogout}) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavDropdown title={username} id="basic-nav-dropdown">
-            <NavDropdown.Item as="button"><Link className="link-styling" to={`/users/${username}`}>MyProfile</Link></NavDropdown.Item>
-            <NavDropdown.Item as="button"><Link className="link-styling" to={`/myfavorites/${username}`}>Favorites</Link></NavDropdown.Item>
+          <NavDropdown title={user} id="basic-nav-dropdown">
+            <NavDropdown.Item as="button"><Link className="link-styling" to={`/users/${user}`}>MyProfile</Link></NavDropdown.Item>
+            <NavDropdown.Item as="button"><Link className="link-styling" to={`/myfavorites/${user}`}>Favorites</Link></NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item as="button" onClick={() => {onLogout()}}>Log-out</NavDropdown.Item>
           </NavDropdown>
@@ -61,3 +68,5 @@ export function NavView({username, changeView, selectedView, onLogout}) {
     </Navbar>
   )
 }
+
+export default connect(mapStateToProps, {setView})(NavView);
