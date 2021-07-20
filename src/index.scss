@@ -3,3 +3,8 @@ $color: steelblue;
 .my-flix {
   color: $color
 }
+
+div>a:hover {
+  text-decoration: none;
+  color: black;
+}
