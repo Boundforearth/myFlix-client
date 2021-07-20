@@ -12,15 +12,13 @@ const mapStateToProps = state => {
   return { user };
 };
 
-export function ProfileView(props) {
+function ProfileView({user, setUser}) {
   //these will be used to display the users information on their profile.
   const [email, setEmail] = useState("");
   const [birthdate, setBirthdate] = useState("")
 
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-
-  const { user } = props;
 
   let token = localStorage.getItem("token");
 
@@ -76,7 +74,7 @@ export function ProfileView(props) {
       .then(() => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        props.setUser('');
+        setUser('');
         alert(`${user}'s account has been deleted!`);
         window.open('/', '_self');
       }).
@@ -104,7 +102,7 @@ export function ProfileView(props) {
         localStorage.removeItem("user");
         localStorage.setItem("user", form.username);
         //change the state of the username
-        props.setUser(form.username);
+        setUser(form.username);
         //redirect the user to their new profile page
         window.open(`${form.username}`, '_self')
       })
