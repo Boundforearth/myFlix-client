@@ -20,9 +20,9 @@ import MovieView from "../movie-view/movie-view";
 import MoviesList from '../movies-list/movies-list';
 import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
-import { ProfileView } from "../profile-view/profile-view";
+import ProfileView from "../profile-view/profile-view";
 import { FavoritesView } from "../favorites-view/favorites-view";
-import { NavView } from "../nav-view/nav-view";
+import NavView from "../nav-view/nav-view";
 
 import "./main-view.scss";
 
@@ -109,7 +109,7 @@ class MainView extends React.Component {
     //If all other if statements don't run, the movie card view is brought up
     return (
       <Router>
-        <NavView selectedView={selectedView} changeView={(view) => {this.setSelectedView(view)}} username={user} onLogout={() => {this.onLoggedOut()}}/>
+        <NavView onLogout={() => {this.onLoggedOut()}}/>
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={() => {
             if(!user) return <Col>
@@ -169,7 +169,7 @@ class MainView extends React.Component {
             </Col>
             if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
-              <ProfileView setUser={(user) => this.setUser(user)} user={user} onBackClick={() => history.goBack()} />
+              <ProfileView onBackClick={() => history.goBack()} />
             </Col>
           }}/>
         </Row>
