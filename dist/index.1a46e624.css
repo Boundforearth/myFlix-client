@@ -69,6 +69,7 @@
 
 .link-styling:hover {
   color: black;
+  text-decoration: none;
 }
 body {
   padding-top: 5rem;
@@ -91,8 +92,13 @@ body {
   flex-direction: column;
 }
 
-.link {
+.link-styling {
   color: black;
+}
+
+.link-styling:hover {
+  color: black;
+  text-decoration: none;
 }
 .vertical-card {
   max-width: 14rem !important;
@@ -139,5 +145,10 @@ p {
 }
 .my-flix {
   color: steelblue;
+}
+
+div > a:hover {
+  text-decoration: none;
+  color: black;
 }
 /*# sourceMappingURL=index.1a46e624.css.map */
