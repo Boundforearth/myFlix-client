@@ -1,0 +1,20 @@
+body {
+  padding-top: 5rem;
+}
+
+.all-col-sizing {
+  padding: 0;
+  min-width: 10rem;
+}
+
+.row {
+  justify-content: center;
+}
+
+#flex-row {
+  flex-wrap: wrap;
+}
+
+#flex-column {
+  flex-direction: column;
+}
