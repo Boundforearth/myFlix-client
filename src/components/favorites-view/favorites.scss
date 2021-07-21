@@ -1,6 +1,6 @@
-.vertical-card {
-  max-width: 14rem !important;
-  color: black !important;
+.vertical-card.vertical-card {
+  max-width: 14rem;
+  color: black;
 }
 
 .card-styling {
@@ -11,8 +11,8 @@
   height: 20rem;
 }
 
-.vertical-body {
-  height: 15rem !important;
+.vertical-body.vertical-body {
+  height: 15rem;
 }
 
 .body-sizing {
@@ -26,18 +26,18 @@ p {
   text-overflow: ellipsis;
 }
 
-.horizontal-card {
-  display: flex !important;
+.horizontal-card.horizontal-card {
+  display: flex;
 }
 
-.horizontal-image-size {
-  height: 10rem !important;
-  width: 7rem !important;
+.horizontal-image-size.horizontal-image-size {
+  height: 10rem;
+  width: 7rem;
 }
 
-.horizontal-body {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  color: black !important;
+.horizontal-body.horizontal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
 }
