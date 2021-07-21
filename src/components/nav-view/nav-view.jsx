@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -67,6 +68,13 @@ function NavView({user, selectedView, setView, onLogout}) {
       </Navbar.Collapse>
     </Navbar>
   )
+}
+
+NavView.propTypes = {
+  setView: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired,
+  selectedView: PropTypes.string.isRequired,
+  onLogout: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, {setView})(NavView);

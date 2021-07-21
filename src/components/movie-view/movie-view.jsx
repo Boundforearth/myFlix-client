@@ -18,7 +18,6 @@ class MovieView extends React.Component {
       {
         headers: {Authorization: `Bearer ${token}`}})
       .then(() => {
-        console.log(movie);
         this.props.deleteFavorite(movie);
         alert("The movie has been deleted from your favorites");
       })
@@ -54,7 +53,6 @@ class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick, currentFavorites} = this.props
-    console.log(currentFavorites)
     this.checkFavorites(movie._id, currentFavorites);
 
     return(
@@ -95,14 +93,17 @@ MovieView.propTypes = {
       Name: PropTypes.string.isRequired,
       Description: PropTypes.string
     }).isRequired
-
   }).isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  deleteFavorite: PropTypes.func.isRequired,
+  onBackClick: PropTypes.func.isRequired,
+  currentFavorites: PropTypes.array.isRequired
+
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return { 
     movies: state.movies,
-    user: state.user,
     currentFavorites: state.currentFavorites
    }
 }

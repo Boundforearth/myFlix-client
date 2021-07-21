@@ -1,14 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
 
-export class FavoritesView extends React.Component {
+const mapStateToProps = state => {
+  const { selectedView } = state;
+  return { selectedView };
+}
+
+class FavoritesView extends React.Component {
 
   render() {
     //set the props to variables
-    const movie = this.props.movieData;
-    const selectedView = this.props.selectedView;
+    const { movie, selectedView } = this.props;
 
         //These variables will be used to set class to chnage the card display
         let selectedStyle1;
@@ -47,3 +52,25 @@ export class FavoritesView extends React.Component {
     );
   }
 }
+
+FavoritesView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Featured: PropTypes.bool.isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string
+    }).isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string
+    }).isRequired
+  }).isRequired,
+  selectedView: PropTypes.string.isRequired
+}
+
+export default connect(mapStateToProps)(FavoritesView)

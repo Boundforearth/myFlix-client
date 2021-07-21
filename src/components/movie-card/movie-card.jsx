@@ -4,12 +4,17 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
 import "./movie-card.scss";
+import { connect } from "react-redux";
 
-export class MovieCard extends React.Component {
+const mapStateToProps = state => {
+  const { selectedView } = state;
+  return { selectedView};
+}
+
+class MovieCard extends React.Component {
   render() {
     //set the props to variables
-    const movie = this.props.movieData;
-    const selectedView = this.props.selectedView;
+    const { movie, selectedView} = this.props
 
     //These variables will be used to set class to chnage the card display
     let selectedStyle1;
@@ -49,7 +54,7 @@ export class MovieCard extends React.Component {
 }
 
 MovieCard.propTypes = {
-  movieData: PropTypes.shape({
+  movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
@@ -66,4 +71,7 @@ MovieCard.propTypes = {
     }).isRequired
 
   }).isRequired,
-};
+  selectedView: PropTypes.string.isRequired
+}
+
+export default connect(mapStateToProps)(MovieCard);

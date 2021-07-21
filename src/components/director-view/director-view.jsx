@@ -22,3 +22,13 @@ render() {
   );
 }
 }
+
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string,
+    Birth: PropTypes.string,
+    Death: PropTypes.string
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
+}
