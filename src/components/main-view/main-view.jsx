@@ -1,16 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import { setMovies, setUser, setFavorites, setView } from '../../actions/actions';
-
-/* 
-  #1 The rest of components import statements but without the MovieCard's 
-  because it will be imported and used in the MoviesList component rather
-  than in here. 
-*/
 
 
 //import other views to be used
@@ -21,17 +16,12 @@ import MoviesList from '../movies-list/movies-list';
 import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
 import ProfileView from "../profile-view/profile-view";
-import { FavoritesView } from "../favorites-view/favorites-view";
+import FavoritesView from "../favorites-view/favorites-view";
 import NavView from "../nav-view/nav-view";
 
 import "./main-view.scss";
 
 class MainView extends React.Component {
-
-  //set the states
-  constructor() {
-    super();
-  }
 
   //get the movie data when the component mounts
   componentDidMount() {
@@ -86,7 +76,7 @@ class MainView extends React.Component {
     window.open('/', '_self');
     //reset the states
     this.props.setUser('');
-    this.props.currentFavorites([])
+    this.props.setFavorites([])
     this.props.setView('1');
 
   }
@@ -163,13 +153,11 @@ class MainView extends React.Component {
 
           <Route path={`/users/${user}`} render={({match, history}) => {
             if(!user) return <Col>
-            <LoginView onLoggedIn={user => this.onLoggedIn(user)} notRegistered={() => {
-    this.toggleRegisterView();
-    }}/>
+            <LoginView onLoggedIn={user => this.onLoggedIn(user)}/>
             </Col>
             if (!movies.length) return <div className="main-view" />;
             return <Col md={6} xs={8}>
-              <ProfileView onBackClick={() => history.goBack()} />
+              <ProfileView />
             </Col>
           }}/>
         </Row>
@@ -197,7 +185,7 @@ class MainView extends React.Component {
               //map the new list of movies to their own cards called FavoritesView
             return favoriteMovies.map(m => (
               <Col lg={3} md={4} sm={6} bsPrefix="all-col-sizing" key={m._id}>
-                <FavoritesView setMovies={(array) => this.setMovies(array)} user={user} selectedView={selectedView} movieData={m} favorites={currentFavorites}/>
+                <FavoritesView movie={m} />
               </Col>
             ))
             }} />
@@ -205,6 +193,17 @@ class MainView extends React.Component {
       </Router>
     );
   }
+}
+
+MainView.propTypes = {
+  movies: PropTypes.array.isRequired,
+  user: PropTypes.string.isRequired,
+  currentFavorites: PropTypes.array.isRequired,
+  selectedView: PropTypes.string.isRequired,
+  setMovies: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  setView: PropTypes.func.isRequired,
+  setFavorites: PropTypes.func.isRequired
 }
 
 let mapStateToProps = state => {
