@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import "./login-view.scss"
 
-export function LoginView(props) {
+export function LoginView({onLoggedIn}) {
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
 
@@ -19,7 +19,7 @@ export function LoginView(props) {
     })
     .then((response) => {
       const data = response.data;
-      props.onLoggedIn(data);
+      onLoggedIn(data);
     })
     .catch ((e) => {
       console.error(e);
