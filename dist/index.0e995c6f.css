@@ -1,48 +1,10 @@
 .my-flix {
   color: steelblue;
 }
-.vertical-card {
-  max-width: 14rem !important;
-  color: black !important;
-}
 
-.card-styling {
-  margin: 1rem;
-}
-
-.movie-card-img {
-  height: 20rem;
-}
-
-.vertical-body {
-  height: 15rem !important;
-}
-
-.body-sizing {
-  padding: 0.675rem;
-  cursor: pointer;
-}
-
-p {
-  max-height: 12rem;
-  overflow: scroll;
-  text-overflow: ellipsis;
-}
-
-.horizontal-card {
-  display: flex !important;
-}
-
-.horizontal-image-size {
-  height: 10rem !important;
-  width: 7rem !important;
-}
-
-.horizontal-body {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  color: black !important;
+div > a:hover {
+  text-decoration: none;
+  color: black;
 }
 #movie-view-image {
   max-width: 20rem;
@@ -105,6 +67,7 @@ p {
 
 .link-styling:hover {
   color: black;
+  text-decoration: none;
 }
 body {
   padding-top: 5rem;
@@ -127,8 +90,13 @@ body {
   flex-direction: column;
 }
 
-.link {
+.link-styling {
   color: black;
+}
+
+.link-styling:hover {
+  color: black;
+  text-decoration: none;
 }
 
 
@@ -139,5 +107,48 @@ body {
 
 .user-info {
   margin-bottom: 3rem;
+}
+.vertical-card.vertical-card {
+  max-width: 14rem;
+  color: black;
+}
+
+.card-styling {
+  margin: 1rem;
+}
+
+.movie-card-img {
+  height: 20rem;
+}
+
+.vertical-body.vertical-body {
+  height: 15rem;
+}
+
+.body-sizing {
+  padding: 0.675rem;
+  cursor: pointer;
+}
+
+p {
+  max-height: 12rem;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+.horizontal-card.horizontal-card {
+  display: flex;
+}
+
+.horizontal-image-size.horizontal-image-size {
+  height: 10rem;
+  width: 7rem;
+}
+
+.horizontal-body.horizontal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
 }
 /*# sourceMappingURL=index.0e995c6f.css.map */
