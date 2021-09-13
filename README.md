@@ -1,5 +1,5 @@
 # myFlix-client
-The front end of a movie app that will allow users to register and browse through the movies in the database. They will be able to add movies to a list of their favorites as well.  The app will be built with React and will communicate with the myFlix API.
+The front end of a movie app that allows users to register and browse through the movies in the database. They can add movies to a list of their favorites as well.  The app will be built with React and will communicate with the movie API that I built as a previous project.
 
 ## Dependencies
 - axios: "^0.21.1
